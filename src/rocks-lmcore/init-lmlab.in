@@ -1,0 +1,146 @@
+#!/bin/bash
+#
+# This script is creates configuration files for postgres and pgbouncer. 
+# The script can be run at any time to remove all the previous configuration
+# and create a new one. 
+
+usage () 
+{
+    echo "Usage: $0"
+    echo "This script is run during the roll install and will:"
+    echo "     - inserts host IP in @LMHOME@/config/config.lmlab.ini\n"
+    echo "     - installs cron files\n"
+    echo "   "
+}
+
+if [ $# -ne 0 ]; then
+    usage
+    exit 0
+fi 
+
+set_defaults() {
+    LOG=@LMSCRATCHDISK@/log/`/bin/basename $0`.log
+    rm -f $LOG
+    touch $LOG
+
+    PROF=/etc/profile.d/lifemapper-lab.sh
+    echo "-- set environment"  >> $LOG
+    if [ -f $PROF ] ; then
+	 . $PROF 
+    else
+    	echo "ERROR: file $PROF not found" >> $LOG 
+    	exit
+    fi
+
+    echo "-- enable modules"  >> $LOG
+    source /usr/share/Modules/init/bash
+
+    # Rocks version
+    ROCKS_VER=`/opt/rocks/bin/rocks list roll | grep base | awk '{print $2}'`
+   
+    PROFILE=/var/lib/pgsql/.bash_profile
+    BIN=@PKGROOT@/rocks/bin
+    MYPY3=@PYBIN@
+    
+    # config files
+    CONFIG_FILE=@LMHOME@/config/config.lmlab.ini
+    SITE_CONFIG_FILE=@LMHOME@/config/config.site.ini
+        
+    # Source function library.
+    INITD=/etc/rc.d/init.d
+    . $INITD/functions
+}
+
+
+cmd_opt_python () {
+	cmd=$1
+    echo "-- $1 opt-python" >> $LOG
+    module $1 opt-python
+    $MYPY3 --version >> $LOG
+}
+
+set_permissions () {
+    /bin/egrep -i "^lmwriter" /etc/passwd
+    if [ $? -ne 0 ]; then
+        echo "Error: user lmwriter does not exist" >> $LOG
+        exit 1
+    fi
+
+    echo "Update group permissions for lmwriter on @LMHOME@" >> $LOG
+    for item in "config" "Lm*" "__init__.py*" ; do
+        /bin/chgrp -R lmwriter @LMHOME@/$item
+        /bin/chmod -R g+ws     @LMHOME@/$item
+    done
+}
+
+# Install all python wheel files with pip
+finish_wheel_installs () {
+    $MYPY3 -m ensurepip --default-pip
+    $MYPY3 -m pip install --upgrade pip
+    WHL_DIR=@PKGROOT@/rocks/etc
+
+    INSTALLED_PKGS=`$MYPY3 -m pip list | /usr/bin/grep -v Package | /usr/bin/grep -v "^----" | /usr/bin/awk '{print $1}'`
+    # install rest of wheel files, ignore previously installed files
+    echo "-- install remaining wheel dependencies ..." >> $LOG
+    FILES=$WHL_DIR/*whl
+    startidx=$((${#WHL_DIR} + 2))
+    for f in $FILES
+        do
+            filelen=${#f}
+            # filename prefix sometimes differs from package name
+            pkgname=$(echo $f | cut -c$startidx-$filelen | cut -d'-' -f1)
+            if [[ ${INSTALLED_PKGS[*]} =~ $pkgname ]]; then
+                echo "$pkgname installed already ..."
+            else
+                echo "install remaining dependency $pkgname ..."
+                $MYPY3 -m pip install $f
+            fi
+        done
+}
+
+
+# update linker paths
+run_ldconfig () {
+    echo "-- run ldconfig" >> $LOG
+    /sbin/ldconfig
+}
+
+
+
+
+# need to update openssl for postgres
+update_openssl() {
+    echo "-- yum update openssl" >> $LOG
+    cmd_opt_python unload 
+    /usr/bin/yum --enablerepo base update openssl >> $LOG 
+    cmd_opt_python load 
+}
+
+# install cron jobs for daily execution
+install_cron_jobs () {
+    echo "-- Start install-lmlab-cron" >> $LOG
+    $BIN/install-lmlab-cron
+    echo "-- End install-lmlab-cron" >> $LOG
+}
+
+# run updateCfg to put correct IP, makeflow parameters lmlab's config.lmlab.ini 
+update_config() {
+    echo "-- update host IP and CCTools params in @LMHOME@/config/config.lmlab.ini" >> $LOG
+    $BIN/update-lmlab >> $LOG  2>&1
+}
+
+
+TimeStamp () {
+    echo $1 `/bin/date` >> $LOG
+}
+
+####### Main #######
+set_defaults
+TimeStamp "# Start"
+
+finish_wheel_installs
+set_permissions
+install_cron_jobs
+update_config
+
+TimeStamp "# End"

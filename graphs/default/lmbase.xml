@@ -1,0 +1,36 @@
+<?xml version="1.0" standalone="no"?>
+
+<graph>
+
+    <description>
+
+    The Lifemapper-core Roll, for core dependencies of Lifemapper services
+
+    </description>
+
+    <copyright>
+    Copyright (c) 2000 - 2012 The Regents of the University of California.
+    All rights reserved. Rocks(r) v5.5/v6.0 www.rocksclusters.org
+    
+    </copyright>
+
+    <changelog>
+    $Log$
+    </changelog>
+
+    <edge from="server" to="lifemapper-core"/>
+    <edge from="server" to="lifemapper-core-base"/>
+    <edge from="client" to="lifemapper-core-base"/>
+
+    <!-- put FE portion first, compute nodes last  -->
+    <order head="lifemapper-core">
+        <tail>lifemapper-core-base</tail>
+    </order>
+
+    <!-- put lifemapper last in all rolls -->
+    <order head="TAIL">
+        <tail>lifemapper-core-base</tail>
+        <tail>lifemapper-core</tail>
+    </order>
+
+</graph>

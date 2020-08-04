@@ -1,0 +1,13 @@
+NAME    = rocks-lifemapper
+VERSION = $(LMCODE_VERSION)
+RELEASE = 1
+
+TARBALL_POSTFIX	= tar.gz
+
+RPM.FILES =  \
+    $(PKGROOT)/*  \n\
+    /etc/httpd/conf.d/lifemapper-lab-http.conf  \n\
+    /etc/ld.so.conf.d/lifemapper-lab-ld.conf  \n\
+    /etc/logrotate.d/lifemapper-httpd  \n\
+    /etc/profile.d/lifemapper-lab.*  \n\
+    /etc/systemd/system/httpd.service.d/lifemapper-lab-umask.conf
