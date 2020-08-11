@@ -81,20 +81,20 @@ SEDSPEC += \
         -e 's%@TARBALL_POSTFIX@%$(TARBALL_POSTFIX)%g'
         
 PROFILES = \
-	lifemapper-lab.sh \
-	lifemapper-lab.csh 
+	lifemapper-core.sh \
+	lifemapper-core.csh 
 
 CONFIGS = \
-	lifemapper-lab-http.conf \
-	lifemapper-lab-ld.conf
+	lifemapper-core-http.conf \
+	lifemapper-core-ld.conf
 
 
 PROGS = \
-	clean-lmlab-roll.sh \
-	init-lmlab \
-	install-lmlab-cron \
-    solr-lmlab-index \
-	update-lmlab
+	clean-lmcore-roll.sh \
+	init-lmcore \
+	install-lmcore-cron \
+    solr-lmcore-index \
+	update-lmcore
 
 PYFILES = __init__.py
 
