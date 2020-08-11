@@ -4,7 +4,7 @@ APACHE_TMP	    = /var/www/tmp
 LMURL			= http://yeti.lifemapper.org/dl
 
 LMDISK          = /share/lm
-LMLABDISK       = /share/lmlab
+LMCOREDISK       = /share/lmcore
 SOLRDATA        = $(LMDISK)/solr
 LMSCRATCHDISK	= /state/partition1/lmscratch
 

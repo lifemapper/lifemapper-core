@@ -36,8 +36,8 @@
     <package>opt-lifemapper-zc.lockfile</package>
 
     <!-- lifemapper distro -->
-    <package>roll-lifemapper-lab-kickstart</package>
-    <package>roll-lifemapper-lab-usersguide</package>
+    <package>roll-lifemapper-core-kickstart</package>
+    <package>roll-lifemapper-core-usersguide</package>
 
 <post>
 
@@ -74,14 +74,14 @@ fi
 /opt/rocks/bin/rocks run host compute "/usr/bin/systemctl restart autofs.service"
 
 # FE directory exported to /share
-/bin/mkdir -p /state/partition1/lmlab
-/bin/mkdir -p /state/partition1/lmlab/data
-/bin/chgrp -R lmwriter /state/partition1/lmlab
-/bin/chmod -R g+ws     /state/partition1/lmlab
+/bin/mkdir -p /state/partition1/lmcore
+/bin/mkdir -p /state/partition1/lmcore/data
+/bin/chgrp -R lmwriter /state/partition1/lmcore
+/bin/chmod -R g+ws     /state/partition1/lmcore
 
 /usr/bin/systemctl restart httpd.service
 
-# Mounts /export/lmlab to /share/lmlab
+# Mounts /export/lmcore to /share/lmcore
 <file name="/etc/auto.share" mode="append">
 lm &Kickstart_PrivateHostname;:/export/&amp;
 </file>

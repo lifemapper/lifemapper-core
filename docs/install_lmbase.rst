@@ -1,7 +1,7 @@
 
 .. highlight:: rest
 
-Install or Update a Lifemapper Lab installation
+Install or Update a Lifemapper Core installation
 ==========================================================
 .. contents::  
 
@@ -10,20 +10,13 @@ git config --global user.name "Aimee Stewart"
 
 Current versions
 ----------------
-#. **Download** new Lifemapper Lab roll to server, then validate checksum::
+#. **Download** new Lifemapper Core roll to server, then validate checksum::
 
    # sha256sum -c *sha
 
-(If update) Stop processes
---------------------------
+#. To **destroy** existing install, run::
 
-#. **Stop solr**::
-
-     root# /usr/sbin/service solr stop
-
-#. To **destroy** existing install, including solr index, run::
-
-   # bash /opt/lifemapper/rocks/etc/clean-lmlab-roll.sh
+   # bash /opt/lifemapper/rocks/etc/clean-lmcore-roll.sh
 
 Update existing code and script RPMs (without new roll)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -58,16 +51,16 @@ New roll install or update existing roll
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #. **Remove old roll**::
 
-   # rocks remove roll lifemapper-lab
+   # rocks remove roll lifemapper-core
       
 #. **Add new roll with rpms**, ensuring that old versions of rpms and files 
    are replaced::
 
-   # rocks add roll lifemapper-lab-*.iso clean=1
+   # rocks add roll lifemapper-core-*.iso clean=1
    
 #. **Create distribution**::
 
-   # rocks enable roll lifemapper-lab
+   # rocks enable roll lifemapper-core
    # (module unload opt-python; \
       cd /export/rocks/install; \
       rocks create distro; \
@@ -76,8 +69,8 @@ New roll install or update existing roll
 #. **Create and run install script**::
 
     # (module unload opt-python; \
-       rocks run roll lifemapper-lab > add-lab.sh; \
-       bash add-lab.sh 2>&1 | tee add-lab.out)
+       rocks run roll lifemapper-core > add-core.sh; \
+       bash add-core.sh 2>&1 | tee add-core.out)
 
 #. **Finish FE with reboot** ::  
 
@@ -94,12 +87,12 @@ Look for Errors
    
 #. **Check log files** After the frontend boots up, check the success of 
    initialization commands in log files in /tmp (these may complete up to 5
-   minutes after reboot).  The /tmp/post-99-lifemapper-lab.log file contains all
+   minutes after reboot).  The /tmp/post-99-lifemapper-core.log file contains all
    output from reinstall-reboot-triggered scripts and is created fresh 
    each time.  All other logfiles are in /state/partition1/lmscratch/log 
    and may be output appended to the end of an existing logfile (from previous 
    runs) and will be useful if the script must be re-run manually for testing.
    
-   * /tmp/post-99-lifemapper-lab.debug (calls init_lmlab on reboot) 
-   * /state/partition1/lmscratch/log/init_lab.log
+   * /tmp/post-99-lifemapper-core.debug (calls init_lmcore on reboot) 
+   * /state/partition1/lmscratch/log/init_core.log
      

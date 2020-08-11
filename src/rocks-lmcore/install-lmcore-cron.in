@@ -28,8 +28,8 @@ TimeStamp () {
 
 # remove obsolete Lifemapper cron jobs
 removeOldTasks () {
-    rm -vf  ${CRON_HOURLY_DIR}/lmlab_*
-    rm -vf  ${CRON_DAILY_DIR}/lmlab_*
+    rm -vf  ${CRON_HOURLY_DIR}/lmcore_*
+    rm -vf  ${CRON_DAILY_DIR}/lmcore_*
     echo "Removed old tasks in ${CRON_HOURLY_DIR} and ${CRON_DAILY_DIR} on frontend ..." | tee -a $LOG
 }
 

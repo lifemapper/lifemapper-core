@@ -8,7 +8,7 @@ usage ()
 {
     echo "Usage: $0"
     echo "This script is run during the roll install and will:"
-    echo "     - inserts host IP in @LMHOME@/config/config.lmlab.ini\n"
+    echo "     - inserts host IP in @LMHOME@/config/config.lmcore.ini\n"
     echo "     - installs cron files\n"
     echo "   "
 }
@@ -23,7 +23,7 @@ set_defaults() {
     rm -f $LOG
     touch $LOG
 
-    PROF=/etc/profile.d/lifemapper-lab.sh
+    PROF=/etc/profile.d/lifemapper-core.sh
     echo "-- set environment"  >> $LOG
     if [ -f $PROF ] ; then
 	 . $PROF 
@@ -42,10 +42,6 @@ set_defaults() {
     BIN=@PKGROOT@/rocks/bin
     PY3=@PYBIN@
     
-    # config files
-    CONFIG_FILE=@LMHOME@/config/config.lmlab.ini
-    SITE_CONFIG_FILE=@LMHOME@/config/config.site.ini
-        
     # Source function library.
     INITD=/etc/rc.d/init.d
     . $INITD/functions
@@ -119,7 +115,7 @@ install_cron_jobs () {
     echo "-- End install-lmcore-cron" >> $LOG
 }
 
-# run updateCfg to put correct IP, makeflow parameters lmlab's config.lmlab.ini 
+# run updateCfg to put correct IP, makeflow parameters lmcore's config.lmcore.ini 
 update_config() {
     echo "-- update solr index" >> $LOG
     $BIN/update-lmcore >> $LOG  2>&1

@@ -31,8 +31,8 @@ set_defaults() {
 del-lifemapper() {
    echo "Removing lifemapper-* and prerequisite RPMS" >> $LOG
    $RM lifemapper-solr-common
-   $RM rocks-lmlab
-   $RM roll-lifemapper-lab-usersguide
+   $RM rocks-lmcore
+   $RM roll-lifemapper-core-usersguide
 }
 
 del-lifemapper-shared() {
@@ -53,7 +53,7 @@ del-lifemapper-shared() {
     fi 
 
     if [[ $LMCOMPUTE_ROLL_COUNT = 0 ]] ; then
-        echo "Removing lmcompute/lmlab RPMs shared" >> $LOG
+        echo "Removing lmcompute/lmcore RPMs shared" >> $LOG
         # java deps
         $RM copy-jdk-configs
         $RM java-1.8.0-openjdk-headless
@@ -66,7 +66,7 @@ del-lifemapper-shared() {
     fi
 
     if [[ $LMSERVER_ROLL_COUNT = 0 ]] ; then
-        echo "Removing lmlab/lmserver RPMs shared" >> $LOG
+        echo "Removing lmcore/lmserver RPMs shared" >> $LOG
        $RM opt-lifemapper-cheroot
        $RM opt-lifemapper-cherrypy
        $RM opt-lifemapper-mod_wsgi
@@ -126,12 +126,8 @@ stop-services () {
 
 del-config () {
     echo "Removing system configuration files used by lifemapper" >> $LOG
-    rm -rf  /etc/ld.so.conf.d/lifemapper-lab-ld.conf
-    rm -rf  /etc/profile.d/lifemapper-lab.*
-
-    if [ $LMLAB_ROLL_COUNT = 0 ]; then
-        rm -rf  /etc/security/limits.d/lifemapper.solr.conf
-    fi
+    rm -rf  /etc/ld.so.conf.d/lifemapper-core-ld.conf
+    rm -rf  /etc/profile.d/lifemapper-core.*
 }
 
 del-directories () {   
@@ -141,39 +137,39 @@ del-directories () {
    rm -rf /state/partition1/lmscratch/tmpUpload
    
    echo "Removing data directories" >> $LOG
-   rm -rf /state/partition1/lmlab
+   rm -rf /state/partition1/lmcore
 }
 
 del-webstuff () {
-    echo "Removing lmlab apache tmp directory" >> $LOG
+    echo "Removing lmcore apache tmp directory" >> $LOG
     rm -rf /var/www/tmp
     
-    echo "Removing lifemapper-lab web config" >> $LOG
-    rm -f /etc/httpd/conf.d/lifemapper-lab-http.conf
-    rm -f /etc/systemd/system/httpd.service.d/lifemapper-lab-umask.conf
-    rm -rf  /etc/logrotate.d/lifemapper-lab-httpd.conf
+    echo "Removing lifemapper-core web config" >> $LOG
+    rm -f /etc/httpd/conf.d/lifemapper-core-http.conf
+    rm -f /etc/systemd/system/httpd.service.d/lifemapper-core-umask.conf
+    rm -rf  /etc/logrotate.d/lifemapper-core-httpd.conf
 }
 
 # remove obsolete Lifemapper cron jobs
 del-cron-jobs () {
-   rm -vf  /etc/cron.*/lmlab_*
+   rm -vf  /etc/cron.*/lmcore_*
    echo "Removed old cron jobs on frontend in /etc directories cron.d, cron.daily and cron.monthly ..."  >> $LOG
 }
 
 del-automount-entry () {
    if [ $LMROLL_COUNT = 1 ]; then
-       cat /etc/auto.share  | grep -v "^lmlab " | grep -v "^lm " > /tmp/auto.share.nolmlab
-       /bin/cp /tmp/auto.share.nolmlab /etc/auto.share
+       cat /etc/auto.share  | grep -v "^lmcore " | grep -v "^lm " > /tmp/auto.share.nolmcore
+       /bin/cp /tmp/auto.share.nolmcore /etc/auto.share
    else
-       cat /etc/auto.share  | grep -v "^lmlab " > /tmp/auto.share.nolmlab
-       /bin/cp /tmp/auto.share.nolmlab /etc/auto.share
+       cat /etc/auto.share  | grep -v "^lmcore " > /tmp/auto.share.nolmcore
+       /bin/cp /tmp/auto.share.nolmcore /etc/auto.share
    fi
 }
 
 finish-cleanup () {
     echo >> $LOG
-    echo "Removing roll lifemapper-lab" >> $LOG 
-    $ROCKS_CMD remove roll lifemapper-lab
+    echo "Removing roll lifemapper-core" >> $LOG 
+    $ROCKS_CMD remove roll lifemapper-core
     
     echo "Rebuilding the distro" >> $LOG
     module unload opt-python

@@ -19,7 +19,7 @@ set_defaults() {
 	# load opt-python and environment
 	source /usr/share/Modules/init/bash
 	module load opt-python
-	. /etc/profile.d/lifemapper-lmlab.sh
+	. /etc/profile.d/lifemapper-lmcore.sh
 	
     THISNAME=`/bin/basename $0`
     LOG=@LMSCRATCHDISK@/log/$THISNAME.log
