@@ -111,23 +111,23 @@ install::
 	install -m 755 $(PROFILES) $(ROOT)/etc/profile.d
 
 	mkdir -p $(ROOT)/etc/httpd/conf.d
-	install -m 644 lifemapper-lab-http.conf $(ROOT)/etc/httpd/conf.d
+	install -m 644 lifemapper-core-http.conf $(ROOT)/etc/httpd/conf.d
 
 	mkdir -p $(ROOT)/etc/ld.so.conf.d
-	install -m 644 lifemapper-lab-ld.conf $(ROOT)/etc/ld.so.conf.d
+	install -m 644 lifemapper-core-ld.conf $(ROOT)/etc/ld.so.conf.d
 	
 	mkdir -p $(ROOT)/etc/logrotate.d
 	install -m 644 lifemapper-httpd $(ROOT)/etc/logrotate.d
 	
 	mkdir -p $(ROOT)/etc/systemd/system/httpd.service.d
-	install -m 644 lifemapper-lab-umask.conf $(ROOT)/etc/systemd/system/httpd.service.d
+	install -m 644 lifemapper-core-umask.conf $(ROOT)/etc/systemd/system/httpd.service.d
 
 	mkdir -p $(ROOT)/$(PKGROOT)/rocks/bin
 	install -m 755 $(PROGS) $(ROOT)/$(PKGROOT)/rocks/bin
 	install -m 644 $(PYFILES) $(ROOT)/$(PKGROOT)/rocks/bin
 
 	mkdir -p $(ROOT)/$(PKGROOT)/rocks/etc
-	install -m 644 clean-lmlab-roll.sh $(ROOT)/$(PKGROOT)/rocks/etc
+	install -m 644 clean-lmcore-roll.sh $(ROOT)/$(PKGROOT)/rocks/etc
 
 
 clean::
