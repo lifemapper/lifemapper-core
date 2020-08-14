@@ -34,7 +34,7 @@
     <package>opt-lifemapper-idna</package>
     <package>opt-lifemapper-requests</package>
     <package>rocks-lmcore</package>
-    <package>lifemapper-solr-common</package>
+    <package>lifemapper-solr</package>
     <package>opt-lifemapper-urllib3</package>
     <package>opt-lifemapper-wheel</package>
 
@@ -73,6 +73,13 @@ fi
 </post>
 
 <post>
+
+/bin/mkdir -p          /state/partition1/lm/solr/data/cores
+/bin/mkdir -p          /state/partition1/lm/solr/data/logs
+
+# reset solr permissions
+/bin/chown -R solr:solr /state/partition1/lm/solr
+/bin/chmod -R 775       /state/partition1/lm/solr
 
 # Node directory NOT shared from frontend
 /bin/mkdir -p /state/partition1/lmscratch/.java/.systemPrefs

@@ -1,7 +1,6 @@
 # $Id$
 #
 # @Copyright@
-# @Copyright@
 #
 # $Log$
 
@@ -11,7 +10,7 @@ REDHAT.ROOT = $(CURDIR)/../../
 include Rules.mk
 
 EXPORTDIR=$(subst share,state/partition1,$(SOLRDATA))
-SCRIPTS = solr.txt solr
+SCRIPTS = solr.txt solr solr-index
 
 
 SEDSPEC += \
@@ -36,6 +35,9 @@ solr.txt: solr.txt.in
 solr: solr.in
 	$(SED) $(SEDSPEC) $^ > $@
 
+solr-index: solr-index.in
+    $(SED) $(SEDSPEC) $^ > $@
+
 prepSrc.sh: prepSrc.sh.in
 	$(SED) $(SEDSPEC) $^ > $@
 	chmod 755 $@
@@ -52,8 +54,8 @@ install::
 	mkdir -p $(ROOT)/$(SOLRDIR)
 	tar -xzf  $(ARCHIVENAME)-$(VERSION).$(TARBALL_POSTFIX)  -C  $(ROOT)/$(SOLRDIR) --strip 1 --exclude docs --exclude contrib	
 
-	mkdir -p $(ROOT)/$(EXPORTDIR)/logs
-
+    mkdir -p $(ROOT)/$(EXPORTDIR)/cores
+    mkdir -p $(ROOT)/$(EXPORTDIR)/logs
 	mkdir -p $(ROOT)/$(EXPORTDIR)/data
 	cp $(ROOT)/$(SOLRDIR)/server/solr/solr.xml $(ROOT)/$(EXPORTDIR)/data
 

@@ -1,12 +1,14 @@
-NAME			= lifemapper-solr-common
+NAME			= lifemapper-solr
 ARCHIVENAME		= solr
 VERSION			= 8.2.0
 JTS				= jts-core-1.15.0.jar
-RELEASE			= 1
+RELEASE			= 2
 TARBALL_POSTFIX	= tgz
 
+JTSDIR          = /opt/solr/server/solr-webapp/webapp/WEB-INF/lib
 SOLRDIR			= /opt/solr
-JTSDIR			= /opt/solr/server/solr-webapp/webapp/WEB-INF/lib
+## shared dir $(LMDISK) common to all lifemapper rolls
+SOLRDATA        = $(LMDISK)/solr
 SOLRUSER		= solr
 
 SOLR_PORT		= 8983

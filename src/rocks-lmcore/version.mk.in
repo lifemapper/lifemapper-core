@@ -1,4 +1,4 @@
-NAME    = rocks-lifemapper
+NAME    = rocks-lmcore
 VERSION = $(LMCODE_VERSION)
 RELEASE = 1
 

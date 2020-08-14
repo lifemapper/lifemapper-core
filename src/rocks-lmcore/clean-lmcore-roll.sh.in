@@ -4,7 +4,7 @@
 #    roll-installed RPMs, 
 #    created directories
 #    rocks host attributes
-#    user accounts and groups : postgres, pgbouncer, solr, lmwriter
+#    user accounts and groups : solr, lmwriter
 
 RM="rpm -evl --quiet --nodeps"
 PIP3=/opt/python/bin/pip3.6
@@ -30,9 +30,9 @@ set_defaults() {
 
 del-lifemapper() {
    echo "Removing lifemapper-* and prerequisite RPMS" >> $LOG
-   $RM lifemapper-solr-common
    $RM rocks-lmcore
    $RM roll-lifemapper-core-usersguide
+   $RM roll-lifemapper-core-kickstart
 }
 
 del-lifemapper-shared() {
@@ -43,6 +43,7 @@ del-lifemapper-shared() {
         $RM opt-lifemapper-chardet
         $RM opt-lifemapper-idna
         $RM opt-lifemapper-requests
+        $RM     lifemapper-solr
         $RM opt-lifemapper-wheel
         $RM opt-lifemapper-urllib3
     
@@ -117,7 +118,7 @@ del-shared-user-group () {
 # stop services if running
 stop-services () {
     SOLR_PROCESSES=`ps -Af | grep solr | grep -v "grep" | wc -l`
-    if [[ $LMSERVER_ROLL_COUNT = 0 ] && $SOLR_PROCESSES = 1 ]]; then
+    if [[ $LMSERVER_ROLL_COUNT = 0 && $SOLR_PROCESSES = 1 ]]; then
         echo "-- stop Solr process " >> $LOG
         # uses service instead of systemctl
         /usr/sbin/service solr stop
