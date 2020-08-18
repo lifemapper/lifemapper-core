@@ -9,32 +9,45 @@ Lifemapper Core roll
 
 Introduction
 ------------
-This roll installs cherrypy and solr for Lifemapper S^n services.
-All prerequisite software listed below are a part of the roll and 
-will be installed and configured during roll installation. 
-The roll has been tested with Rocks 7.
+This roll installs mod-wsgi, cherrypy and solr for Lifemapper S^n services.
+All prerequisite software are a part of the roll and will be installed and 
+configured during roll installation. The roll has been tested with Rocks 7.
 
-Prerequisites
-~~~~~~~~~~~~~
+Roll includes
+-------------
+The roll sets up software elements common to all lifemapper installations and 
+is a dependency for all other lifemapper rolls:: 
 
-This section lists all the prerequisites for lifemapper-lab code dependencies.
-The dependencies are either build from source or installed from RPMs 
-during the roll build.
- 
-    
-Downloads
-~~~~~~~~~
+* Software (standard and lifemapper-configured RPMs, python libraries built from 
+  source into RPMs or installed from wheels).
+* Users: lmwriter and solr
+* Common directories
+  
+Locations of installed roll components
+--------------------------------------
+#. **/opt/lifemapper/**
+   + /opt/lifemapper/config - core definitions for solr indexes expected
 
-Individual package dependencies
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#. **/opt/solr/** - solr installation
 
-Required Rolls
-~~~~~~~~~~~~~~
+#. **/state/partition1/lmscratch/** -  
+   + /state/partition1/lmscratch/sessions - cherrypy sessions.
+   + /state/partition1/lmscratch/tmpUpload - landing spot for uploaded files
+   + /state/partition1/lmscratch/log - script and daemon logs.
+   + /state/partition1/lmscratch/run - PID files.
+
+#. **/state/partition1/lmcore/** - lmcore specific code 
+
+#. **/state/partition1/lm/** - exported as /share/lm for sharing data with nodes
+   + /share/lm/solr/data/cores - solr indexes
+
+#. **/var/www/tmp/** - for webserver temp files
+
+#. **/var/www/html/roll-documentation/lifemapper-core** - roll documentation, bare  minimum as a place holder.
 
 
 Building a roll
 ---------------
-
 Checkout roll distribution from git repo :: 
 
    # git clone https://github.com/lifemapper/lifemapper-core.git 
@@ -59,19 +72,40 @@ executing the command at the top level of the roll source tree ::
 The resulting ISO file lifemapper-lab-*.iso is the roll that can be added to the
 frontend.
 
-Debugging a roll
-----------------
+Prerequisites
+--------------------
+The roll requires a base installation of Rocks 7 with the following rolls::
+
+  * area51
+  * base
+  * CentOS 7.6.1810
+  * core
+  * ganglia
+  * hpc
+  * kernel
+  * python
+  * sge
+  * Updates-CentOS-7.6.1810
 
 
 Recreate roll ISO
 -----------------
 
 When updating only a few packages in the roll, there is no need to re-create 
-all packages anew. After re-making updated RPMs  from the top level of roll source tree ::   
+all packages anew. 
+
+If changing the structure (add or delete contained packages), first run the
+following from the top level of roll source tree.  This also updates 
+version/date of the roll. :: 
+
+   # make profile
+   
+After re-making updated RPMs from the top level of roll source tree ::   
 
    # make reroll
 
 The new rpms will be inlcuded in the new ISO. 
+
 
 Adding a roll
 -------------
@@ -79,33 +113,11 @@ The roll (ISO file) can be added (1) during the initial installation of the
 cluster (frontend) or (2) to the existing frontend.
 
 
-Adding a roll to a new server
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-
-Adding a roll to a live frontend
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-
-Where installed roll components are
------------------------------------
-
-#. **/state/partition1/lmscratch/** -  
-   + /state/partition1/lmscratch/sessions - cherrypy sessions.
-   + /state/partition1/lmscratch/tmpUpload - landing spot for uploaded files
-   + /state/partition1/lmscratch/log - script and daemon logs.
-   + /state/partition1/lmscratch/run - PID files.
-
-#. **/var/www/tmp/** - for webserver temp files
-
-#. **/var/www/html/roll-documentation/lifemapper-core** - roll documentation, bare  minimum as a place holder.
-
-
 Removing a roll
 ---------------
 
 When debugging a roll may need to remove the roll and all installed RPMs.
-   # bash /opt/lifemapper/rocks/etc/clean-lifemapper-core.sh
+   # bash /opt/lifemapper/rocks/etc/clean-lmcore.sh
 
 These commands remove the installed roll from Rocks database and repo ::
 

@@ -15,7 +15,4 @@ SMTPSENDER			= no-reply-lifemapper@@PUBLIC_FQDN@
 JAVABIN				= /etc/alternatives/java
 
 # Code version
-LMCODE_VERSION			  = 3.4.8.p3
-
-
-
+# LMCODE_VERSION			  = 3.4.8.p3
