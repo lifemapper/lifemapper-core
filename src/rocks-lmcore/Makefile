@@ -89,6 +89,8 @@ CONFIGS = \
 	lifemapper-core-http.conf \
 	lifemapper-core-ld.conf
 
+SCRIPTS = \
+    clean-lmcore-roll.sh
 
 PROGS = \
 	clean-lmcore-roll.sh \
@@ -104,7 +106,7 @@ PYFILES = __init__.py
 
 .SUFFIXES:
 
-build: $(CONFIGS) $(PROFILES) $(PROGS) $(PYFILES) 
+build: $(SCRIPTS) $(CONFIGS) $(PROFILES) $(PROGS) $(PYFILES) 
 	
 install::
 
