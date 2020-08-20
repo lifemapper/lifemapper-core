@@ -72,8 +72,6 @@ SEDSPEC += \
         -e 's%@LMHOME@%$(LMHOME)%g' \
         -e 's%@LMDISK@%$(LMDISK)%g' \
         -e 's%@LMSCRATCHDISK@%$(LMSCRATCHDISK)%g' \
-        -e 's%@SOLRDATA@%$(SOLRDATA)%g' \
-        -e 's%@SOLRUSER@%$(SOLRUSER)%g' \
         -e 's%@PYTHONVER@%$(PYTHONVER)%g' \
         -e 's%@PYBIN@%$(PY.PATH)%g' \
         -e 's%@PYTHON36_PACKAGES@%$(PYTHON36_PACKAGES)%g' \
@@ -96,7 +94,6 @@ PROGS = \
 	clean-lmcore-roll.sh \
 	init-lmcore \
 	install-lmcore-cron \
-    solr-lmcore-index \
 	update-lmcore
 
 PYFILES = __init__.py
