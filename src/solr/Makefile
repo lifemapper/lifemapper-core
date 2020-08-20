@@ -36,7 +36,7 @@ solr: solr.in
 	$(SED) $(SEDSPEC) $^ > $@
 
 solr-index: solr-index.in
-    $(SED) $(SEDSPEC) $^ > $@
+	$(SED) $(SEDSPEC) $^ > $@
 
 prepSrc.sh: prepSrc.sh.in
 	$(SED) $(SEDSPEC) $^ > $@
@@ -54,8 +54,8 @@ install::
 	mkdir -p $(ROOT)/$(SOLRDIR)
 	tar -xzf  $(ARCHIVENAME)-$(VERSION).$(TARBALL_POSTFIX)  -C  $(ROOT)/$(SOLRDIR) --strip 1 --exclude docs --exclude contrib	
 
-    mkdir -p $(ROOT)/$(EXPORTDIR)/cores
-    mkdir -p $(ROOT)/$(EXPORTDIR)/logs
+	mkdir -p $(ROOT)/$(EXPORTDIR)/cores
+	mkdir -p $(ROOT)/$(EXPORTDIR)/logs
 	mkdir -p $(ROOT)/$(EXPORTDIR)/data
 	cp $(ROOT)/$(SOLRDIR)/server/solr/solr.xml $(ROOT)/$(EXPORTDIR)/data
 
