@@ -121,7 +121,7 @@ stop-services () {
     if [[ $LMSERVER_ROLL_COUNT -eq 0 && $SOLR_PROCESSES -eq 1 ]]; then
         echo "-- stop Solr process " >> $LOG
         # uses service instead of systemctl
-        /usr/sbin/service solr stop
+        /usr/bin/systemctl stop solr
     fi    
 }
 
