@@ -202,7 +202,7 @@ del-cron-jobs
 del-directories
 del-automount-entry
 
-if [[ $LMROLL_COUNT -gt 1 ]]; then
+if [[ $LMROLL_COUNT -eq 1 ]]; then
 	del-lifemapper-shared
 	del-shared-directories
 	del-shared-user-group

@@ -1,4 +1,4 @@
-ROLL			= lifemapper-lab
+ROLL			= lifemapper-core
 NAME    		= roll-$(ROLL)-usersguide
 RELEASE			= 0
 
