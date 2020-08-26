@@ -8,18 +8,14 @@ usage ()
 {
     echo "Usage: $0"
     echo "This script runs update scripts, and is intended to be run after" 
-    echo "code and rocks-l* rpms are updated on a Lifemapper installation"
-    echo "The script runs:"
-    echo "    updateCfg which updates variables in"
-    echo "              @LMHOME@/config/config.lmserver.ini file"
-    echo "    updateDB which applies needed database updates"
+    echo "The script solr-index and restarts solr"
 }
 
 set_defaults() {
 	# load opt-python and environment
 	source /usr/share/Modules/init/bash
 	module load opt-python
-	. /etc/profile.d/lifemapper-lmcore.sh
+	. /etc/profile.d/lifemapper-core.sh
 	
     THISNAME=`/bin/basename $0`
     LOG=@LMSCRATCHDISK@/log/$THISNAME.log
