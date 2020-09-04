@@ -2,13 +2,13 @@
 
 # Purpose: Fetch Six source
 # six>=1.7.0 (from pytest; jaraco.collections->cherrypy)
-D7_URL=@PYPI_URL@/ee/ff/48bde5c0f013094d729fe4b0316ba2a24774b3ff1c52d924a8a4cb04078a
-D7_PKG=@ARCHIVENAME@-@VERSION@-py2.py3-none-any.@WHEEL_POSTFIX@
+DL_URL=@PYPI_URL@/ee/ff/48bde5c0f013094d729fe4b0316ba2a24774b3ff1c52d924a8a4cb04078a
+DL_PKG=@ARCHIVENAME@-@VERSION@-py2.py3-none-any.@WHEEL_POSTFIX@
 
-get_wheel_files () {
+get_wheel_file () {
   echo "Fetch @ARCHIVENAME@ wheel"
   wget "$DL_URL/$DL_PKG"
 }
 
 ### main ###
-get_wheel_files
+get_wheel_file
