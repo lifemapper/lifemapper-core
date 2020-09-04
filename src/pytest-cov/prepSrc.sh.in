@@ -4,10 +4,6 @@
 
 #Installing collected packages: py, importlib-metadata, iniconfig, toml, pluggy, attrs, pyparsing, packaging, pytest
 
-# pytest
-DL_URL=@PYPI_URL@/
-DL_PKG=@ARCHIVENAME@-@VERSION@-py2.py3-none-any.@WHEEL_POSTFIX@
-
 # Requirement already satisfied: more-itertools>=4.0.0 (from pytest) (8.5.0)
 # py>=1.8.2
 D1_URL=@PYPI_URL@/68/0f/41a43535b52a81e4f29e420a151032d26f08b62206840c48d14b70e53376
@@ -37,16 +33,24 @@ D6_PKG=attrs-20.1.0-py2.py3-none-any.@WHEEL_POSTFIX@
 D7_URL=@PYPI_URL@/46/19/c5ab91b1b05cfe63cccd5cfc971db9214c6dd6ced54e33c30d5af1d2bc43
 D7_PKG=packaging-20.4-py2.py3-none-any.@WHEEL_POSTFIX@
 
-# zipp>=0.5 (from importlib-metadata>=0.12; python_version < "3.8"->pytest) (3.1.0)
+# more-itertools>=4.0.0 (from pytest>=4.6->pytest-cov)
+# zipp>=0.5 (from importlib-metadata>=0.12; python_version < "3.8"->pytest)
 # six (from packaging->pytest)
 
 # pyparsing>=2.0.2
 D8_URL=@PYPI_URL@/8a/bb/488841f56197b13700afd5658fc279a2025a39e22449b7cf29864669b15d
 D8_PKG=pyparsing-2.4.7-py2.py3-none-any.@WHEEL_POSTFIX@
 
+# coverage
+D9_URL=@PYPI_URL@/43/36/6bad97e1d647fcb131ba898fc07dad9dd07ab9e3a963bfc097559ad938d5
+D9_PKG=coverage-5.2.1-cp36-cp36m-manylinux1_x86_64.@WHEEL_POSTFIX@
 
-DL_URL=@PYPI_URL@/98/db/712bee56f9ab20373508a5a1c662e1db49b407dacf03b5224c6171ed0a3d
-DL_PKG=@ARCHIVENAME@-@VERSION@-py3-none-any.@WHEEL_POSTFIX@
+# pytest
+D10_URL=@PYPI_URL@/98/db/712bee56f9ab20373508a5a1c662e1db49b407dacf03b5224c6171ed0a3d
+D10_PKG=pytest-6.0.1-py3-none-any.@WHEEL_POSTFIX@
+
+DL_URL=@PYPI_URL@/e5/18/401594af67eda194a8b9167208621761927c937db7d60292608342bbac0a
+DL_PKG=pytest_cov-@VERSION@-py2.py3-none-any.whl
 
 get_wheel_files () {
   echo "Fetch @ARCHIVENAME@ dependencies"
@@ -58,6 +62,8 @@ get_wheel_files () {
   wget "$D6_URL/$D6_PKG"
   wget "$D7_URL/$D7_PKG"
   wget "$D8_URL/$D8_PKG"
+  wget "$D9_URL/$D9_PKG"
+  wget "$D10_URL/$D10_PKG"
   
   echo "Fetch @ARCHIVENAME@ wheel"
   wget "$DL_URL/$DL_PKG"

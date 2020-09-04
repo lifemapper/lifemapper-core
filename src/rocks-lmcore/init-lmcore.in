@@ -22,6 +22,11 @@ set_defaults() {
     LOG=@LMSCRATCHDISK@/log/`/bin/basename $0`.log
     rm -f $LOG
     touch $LOG
+    
+    hn=`/bin/hostname`
+    idx=`expr index "$hn" .`
+    shortname=${hn:0:idx-1}
+    MEMBERSHIP=`/opt/rocks/bin/rocks list host $shortname | grep -v MEMBERSHIP | awk '{print $1}'`
 
     PROF=/etc/profile.d/lifemapper-core.sh
     echo "-- set environment"  >> $LOG
@@ -76,9 +81,9 @@ finish_wheel_installs () {
     WHL_DIR=@PKGROOT@/rocks/etc
 
     echo "-- install ordered wheel dependencies ..." >> $LOG
-    # Some filenames <> package names (more-itertools, cherrypy)
+    # Some filenames <> package names (more-itertools, pytest-cov, cherrypy)
     BASE_DEPS="more_itertools six zipp"
-    PYTEST_PLUS_DEPS="py importlib-metadata iniconfig toml pluggy attrs pyparsing packaging pytest"
+    PYTESTCOV_PLUS_DEPS="coverage py importlib-metadata iniconfig toml pluggy attrs pyparsing packaging pytest pytest_cov"
     CHERRYPY_PLUS_DEPS="pytz jaraco.functools tempora portend jaraco.classes importlib-resources jaraco.text jaraco.collections cheroot zc.lockfile CherryPy"
     REQUESTS_DEPS="urllib3 idna certifi chardet requests"
     
@@ -86,27 +91,32 @@ finish_wheel_installs () {
         do
             wname=$WHL_DIR/$dep*whl
             echo "install base dependency $dep ..." >> $LOG
-            @PYBIN@ -m pip install $wname
+            $PY3 -m pip install $wname
         done
     for dep in $PYTEST_PLUS_DEPS
         do
             wname=$WHL_DIR/$dep*whl
             echo "install pytest dependency $dep ..." >> $LOG
-            @PYBIN@ -m pip install $wname
-        done
-    if [[ -f $WHL_DIR/CherryPy*whl
-    for dep in $CHERRYPY_PLUS_DEPS
-        do
-            wname=$WHL_DIR/$dep*whl
-            echo "install cherrypy dependency $dep ..." >> $LOG
-            @PYBIN@ -m pip install $wname
+            $PY3 -m pip install $wname
         done
     for dep in $REQUESTS_DEPS
         do
             wname=$WHL_DIR/$dep*whl
             echo "install requests dependency $dep ..." >> $LOG
-            @PYBIN@ -m pip install $wname
+            $PY3 -m pip install $wname
         done
+    
+    if [ $MEMBERSHIP = Frontend ]; then
+        for dep in $CHERRYPY_PLUS_DEPS
+            do
+                wname=$WHL_DIR/$dep*whl
+                echo "install cherrypy dependency $dep ..." >> $LOG
+                $PY3 -m pip install $wname
+            done
+        wname=$WHL_DIR/coverage*whl
+        $PY3 -m pip install $wname
+    fi
+
 
     INSTALLED_PKGS=`$PY3 -m pip list | /usr/bin/grep -v Package | /usr/bin/grep -v "^----" | /usr/bin/awk '{print $1}'`
     # install any remaining wheel files, ignore previously installed files

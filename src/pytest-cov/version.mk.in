@@ -1,9 +1,10 @@
-NAME 			= opt-lifemapper-pytest
-ARCHIVENAME 	= pytest
-VERSION 		= 6.0.1
+NAME 			= opt-lifemapper-pytest-cov
+ARCHIVENAME 	= pytest_cov
+VERSION 		= 20.10.1
 RELEASE 		= 0
 
-# (ordered) dependencies for pytest
+# (ordered) dependencies for pytest-cov
+#     coverage
 #     more-itertools        (separate rpm)
 #     py
 #     importlib-metadata
@@ -16,6 +17,7 @@ RELEASE 		= 0
 #     packaging
 #     zipp                  (separate rpm)
 #     pytest
+#     pytest-cov
 
 RPM.EXTRAS = "AutoReq: no"
 
