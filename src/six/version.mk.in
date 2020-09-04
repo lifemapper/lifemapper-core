@@ -1,9 +1,11 @@
 NAME		= opt-lifemapper-six
-VERSION		= 1.12.0
+VERSION     = 1.15.0
 ARCHIVENAME	= six
 RELEASE		= 1
 TARBALL_POSTFIX	= tar.gz
 
-RPM.FILES	= $(PYTHON36_PACKAGES)/*
+RPM.FILES =  $(PKGROOT)/*
 
-# TODO: update
+# Satisfies dependencies:
+#   from packaging->pytest
+#   from jaraco.collections->cherrypy

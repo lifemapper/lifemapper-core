@@ -71,7 +71,7 @@ PY.PATH = /opt/python/bin/$(PYTHONVER)
 SEDSPEC += \
         -e 's%@ARCHIVENAME@%$(ARCHIVENAME)%g'  \
         -e 's%@VERSION@%$(VERSION)%g'  \
-        -e 's%@TARBALL_POSTFIX@%$(TARBALL_POSTFIX)%g'
+        -e 's%@WHEEL_POSTFIX@%$(WHEEL_POSTFIX)%g'
 
 prepSrc.sh: prepSrc.sh.in
 	$(SED) $(SEDSPEC) $^ > $@
@@ -83,22 +83,12 @@ prep: prepSrc.sh
 	make prepSrc.sh
 	./prepSrc.sh
 
-build:
-	tar xzf  $(ARCHIVENAME)-$(VERSION).tar.gz 
-	(\
-	    cd $(ARCHIVENAME)-$(VERSION);   \
-	    module load opt-python;			\
-	    $(PY.PATH) setup.py build;      \
-	    module unload opt-python;			\
-	)
+build: 
+    echo $(ARCHIVENAME)-$(VERSION)
 
 install::
-	(\
-	    cd $(ARCHIVENAME)-$(VERSION);   \
-	    module load opt-python;			\
-	    $(PY.PATH) setup.py $@ --root=$(ROOT)/; \
-	    module unload opt-python;			\
-	)
+    mkdir -p $(ROOT)/$(PKGROOT)/rocks/etc
+    install -m 664 $(ARCHIVENAME)-$(VERSION)-py3-none-any.whl $(ROOT)/$(PKGROOT)/rocks/etc
 
 clean::
 	rm -rf $(ARCHIVENAME)-$(VERSION) version.mk prepSrc.sh

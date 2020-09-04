@@ -1,9 +1,24 @@
 NAME		= opt-lifemapper-cherrypy
-VERSION		= 17.4.2
+VERSION     = 18.6.0
 ARCHIVENAME = CherryPy
-RELEASE		= 1
-TARBALL_POSTFIX	= tar.gz
+RELEASE		= 0
+WHEEL_POSTFIX	= whl
 
-RPM.FILES	= $(PYTHON36_PACKAGES)/*
+RPM.FILES =  $(PKGROOT)/*
 
-# TODO: update
+# cherrypy dependencies
+#     pytz
+#     more-itertools    (separate rpm)
+#     jaraco.functools
+#     tempora
+#     portend
+#     jaraco.classes
+#     six
+#     zipp              (separate rpm)
+#     importlib-resources
+#     jaraco.text
+#     six               (separate rpm)
+#     jaraco.collections
+#     cheroot
+#     zc.lockfile
+#     setuptools

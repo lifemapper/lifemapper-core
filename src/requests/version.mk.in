@@ -1,9 +1,13 @@
 NAME = opt-lifemapper-requests
 ARCHIVENAME = requests
-VERSION = 2.22.0
-RELEASE = 1
-TARBALL_POSTFIX	= tar.gz
+VERSION = 2.24.0
+RELEASE = 0
 
-RPM.FILES   = $(PYTHON36_PACKAGES)/*
+RPM.FILES =  $(PKGROOT)/*
 
-# TODO: update
+# requests 2.24.0 dependencies:
+#     chardet<3.1.0,>=3.0.2
+#     idna<2.9,>=2.5
+#     urllib3!=1.25.0,!=1.25.1,<1.26,>=1.21.1
+#     certifi>=2017.4.17
+# Install collected packages: urllib3, idna, certifi, chardet, requests

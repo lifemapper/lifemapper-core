@@ -39,62 +39,6 @@ compile wheel
 module unload opt-python
 
 
-# cherrypy 17.4.2 requires six>=1.11.0, cheroot>=6.2.4, portend>=2.1.1, 
-#                    and for exec, not build:
-#                          more-itertools=5.0.0 
-#                          contextlib2==0.6.0.post1
-#                          zc.lockfile=2.0
-#                          backports.functools_lru_cache=1.6.1
-#                          jaraco.functools=2.0
-# cheroot requires six and setuptools
-# portend requires tempora requires six, pytz
-
-# needed for cheroot build (on devapp, not in LM install?)
-cd src/six
-make prep
-cd ../..
-module load opt-python
-compile six
-module unload opt-python
-install opt-lifemapper-six
-/sbin/ldconfig
-
-cd src/cheroot
-make prep
-cd ../..
-module load opt-python
-compile cheroot
-module unload opt-python
-install opt-lifemapper-cheroot
-/sbin/ldconfig
-
-cd src/pytz
-make prep
-cd ../..
-module load opt-python
-compile pytz
-module unload opt-python
-install opt-lifemapper-pytz
-/sbin/ldconfig
-
-cd src/tempora
-make prep
-cd ../..
-module load opt-python
-compile tempora
-module unload opt-python
-install opt-lifemapper-tempora
-/sbin/ldconfig
-
-cd src/portend
-make prep
-cd ../..
-module load opt-python
-compile portend
-module unload opt-python
-install opt-lifemapper-portend
-/sbin/ldconfig
-
 # Leave with opt-python loaded
 module load opt-python
 

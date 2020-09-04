@@ -1,14 +1,14 @@
 #!/bin/bash
 
-# Purpose: Fetch more-itertools source
-PYPI_URL=https://files.pythonhosted.org/packages
-DL_DIR=dd/26/30fc0d541d9fdf55faf5ba4b0fd68f81d5bd2447579224820ad525934178
-DL_PKG=@ARCHIVENAME@-@VERSION@.@TARBALL_POSTFIX@
+# more-itertools (from cherrypy, pytest)
+DL_URL=@PYPI_URL@/ec/f7/9c33f38577d9fb9b1aa60c0fd9961d09574f5d47d2b830e5183e6adfc8cc
+DL_PKG=$(ARCHIVENAME)-$(VERSION)-py3-none-any.@WHEEL_POSTFIX@
 
-get_source_files () {
-  echo "Fetch @ARCHIVENAME@ source code"
-  wget "$PYPI_URL/$DL_DIR/$DL_PKG"
+
+get_wheel_file () {
+  echo "Fetch @ARCHIVENAME@ wheel"
+  wget "$DL_URL/$DL_PKG"
 }
 
 ### main ###
-get_source_files
+get_wheel_file

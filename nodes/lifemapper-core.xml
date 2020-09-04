@@ -19,21 +19,10 @@
     </changelog>
 
     <package>screen</package>
-
     
-    <!-- for cherrypy -->
-    <package>opt-lifemapper-backports.functools_lru_cache</package>
-    <package>opt-lifemapper-cheroot</package>
+    <!-- for web -->
     <package>opt-lifemapper-cherrypy</package>
-    <package>opt-lifemapper-contextlib2</package>
-    <package>opt-lifemapper-jaraco.functools</package>
     <package>opt-lifemapper-mod_wsgi</package>
-    <package>opt-lifemapper-more-itertools</package>
-    <package>opt-lifemapper-portend</package>
-    <package>opt-lifemapper-pytz</package>
-    <package>opt-lifemapper-six</package>
-    <package>opt-lifemapper-tempora</package>
-    <package>opt-lifemapper-zc.lockfile</package>
 
     <!-- lifemapper distro -->
     <package>roll-lifemapper-core-kickstart</package>

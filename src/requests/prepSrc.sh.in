@@ -1,14 +1,35 @@
 #!/bin/bash
 
 # Purpose: Fetch Requests source
-DL_URL=https://github.com/kennethreitz/@ARCHIVENAME@/archive
-DL_PKG=v@VERSION@.@TARBALL_POSTFIX@
-OUTFILE=@ARCHIVENAME@-@VERSION@.@TARBALL_POSTFIX@
+DL_URL=@PYPI_URL@/45/1e/0c169c6a5381e241ba7404532c16a21d86ab872c9bed8bdcd4c423954103
+DL_PKG=@ARCHIVENAME@-@VERSION@-py2.py3-none-any.@WHEEL_POSTFIX@
 
-get_source_files () {
-  echo "Fetch python requests source code"
-  wget --output-document=$OUTFILE  "$DL_URL/$DL_PKG"
+D1_URL=@PYPI_URL@/9f/f0/a391d1463ebb1b233795cabfc0ef38d3db4442339de68f847026199e69d7
+D1_PKG=urllib3-1.25.10-py2.py3-none-any.@WHEEL_POSTFIX@
+
+D2_URL=@PYPI_URL@/a2/38/928ddce2273eaa564f6f50de919327bf3a00f091b5baba8dfa9460f3a8a8
+D2_PKG=idna-2.10-py2.py3-none-any.@WHEEL_POSTFIX@
+
+D3_URL=@PYPI_URL@/5e/c4/6c4fe722df5343c33226f0b4e0bb042e4dc13483228b4718baf286f86d87
+D3_PKG=certifi-2020.6.20-py2.py3-none-anycertifi-2020.6.20-py2.py3-none-any.@WHEEL_POSTFIX@
+
+D4_URL=@PYPI_URL@/bc/a9/01ffebfb562e4274b6487b4bb1ddec7ca55ec7510b22e4c51f14098443b8
+D4_PKG=chardet-3.0.4-py2.py3-none-any.@WHEEL_POSTFIX@
+
+
+get_dependencies () {
+    echo "Fetch requests dependencies"
+    wget $D1_URL/$D1_PKG
+    wget $D2_URL/$D2_PKG
+    wget $D3_URL/$D3_PKG
+    wget $D4_URL/$D4_PKG
+}
+
+get_wheel_file () {
+    echo "Fetch python requests wheel"
+    wget $DL_URL/$DL_PKG
 }
 
 ### main ###
-get_source_files
+get_dependencies
+get_wheel_file

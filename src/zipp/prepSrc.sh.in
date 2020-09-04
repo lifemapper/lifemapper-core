@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# Purpose: Fetch zipp wheel
+DL_URL=@PYPI_URL@/b2/34/bfcb43cc0ba81f527bc4f40ef41ba2ff4080e047acb0586b56b3d017ace4
+DL_PKG=@ARCHIVENAME@-@VERSION@-py3-none-any.@WHEEL_POSTFIX@
+
+get_wheel_file () {
+  echo "Fetch zipp wheel"
+  wget "$DL_URL/$DL_PKG"
+}
+
+### main ###
+get_wheel_file

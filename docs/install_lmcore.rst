@@ -18,35 +18,6 @@ Current versions
 
    # bash /opt/lifemapper/rocks/etc/clean-lmcore-roll.sh
 
-Update existing code and script RPMs (without new roll)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-#. Copy individual rpms to /export/rocks/install/contrib/7.0/x86_64/RPMS/ 
-   This will only update RPMs that are part of the original roll.
-   To add rpms that are not yet part of the rolls, put them into a directory 
-   shared from FE to nodes (/share/lm/). 
-   
-#. then rebuild distribution.  ::
-   
-   # (module unload opt-python; cd /export/rocks/install; rocks create distro; yum clean all)
-   # yum list updates
-   # yum update
-   
-#. Run ANY scripts to update config
-      
-#. Install new (not from existing roll) rpms on FE, placing in exported dir ::
-   
-   # rpm -iv /share/lm/*rpm
-
-#. Update nodes ::
-   
-   # rocks set host boot compute action=install
-   # rocks run host compute reboot
-
-#. Update nodes with non-roll rpms::
-   
-   # rocks run host compute "(hostname; rpm -iv /share/lm/*rpm)"
-
-
 New roll install or update existing roll
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #. **Remove old roll**::
@@ -80,6 +51,36 @@ New roll install or update existing roll
 
    # rocks set host boot compute action=install
    # rocks run host compute reboot     
+
+Update existing code and script RPMs (without new roll)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#. Copy individual rpms to /export/rocks/install/contrib/7.0/x86_64/RPMS/ 
+   This will only update RPMs that are part of the original roll.
+   To add rpms that are not yet part of the rolls, put them into a directory 
+   shared from FE to nodes (/share/lm/). 
+   
+#. then rebuild distribution.  ::
+   
+   # (module unload opt-python; cd /export/rocks/install; rocks create distro; yum clean all)
+   # yum list updates
+   # yum update
+   
+#. Run ANY scripts to update config
+      
+#. Install new (not from existing roll) rpms on FE, placing in exported dir ::
+   
+   # rpm -iv /share/lm/*rpm
+
+#. Update nodes ::
+   
+   # rocks set host boot compute action=install
+   # rocks run host compute reboot
+
+#. Update nodes with non-roll rpms::
+   
+   # rocks run host compute "(hostname; rpm -iv /share/lm/*rpm)"
+
+
 
       
 Look for Errors

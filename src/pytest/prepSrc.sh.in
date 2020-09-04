@@ -1,0 +1,48 @@
+# Purpose: Fetch @ARCHIVENAME@ wheel and all dependencies
+#Installing collected packages: py, importlib-metadata, iniconfig, toml, pluggy, attrs, pyparsing, packaging, pytest
+
+# pytest
+DL_URL=@PYPI_URL@/
+DL_PKG=@ARCHIVENAME@-@VERSION@-py2.py3-none-any.@WHEEL_POSTFIX@
+
+# Requirement already satisfied: more-itertools>=4.0.0 (from pytest) (8.5.0)
+# py>=1.8.2
+DL_URL=@PYPI_URL@/
+DL_PKG=py-1.9.0-py2.py3-none-any.whl
+
+#  importlib-metadata>=0.12; python_version < "3.8"
+DL_URL=@PYPI_URL@/
+DL_PKG=importlib_metadata-1.7.0-py2.py3-none-any.whl (31 kB)
+
+# iniconfig
+DL_URL=@PYPI_URL@/
+DL_PKG=iniconfig-1.0.1-py3-none-any.whl (4.2 kB)
+
+# toml
+DL_URL=@PYPI_URL@/
+DL_PKG=toml-0.10.1-py2.py3-none-any.whl (19 kB)
+
+# pluggy<1.0,>=0.12
+DL_URL=@PYPI_URL@/
+DL_PKG=pluggy-0.13.1-py2.py3-none-any.whl (18 kB)
+
+# attrs>=17.4.0
+DL_URL=@PYPI_URL@/
+DL_PKG=attrs-20.1.0-py2.py3-none-any.whl (49 kB)
+     |████████████████████████████████| 49 kB 1.1 MB/s 
+
+# packaging
+DL_URL=@PYPI_URL@/
+DL_PKG=packaging-20.4-py2.py3-none-any.whl (37 kB)
+
+// Requirement already satisfied: zipp>=0.5 in /opt/python/lib/python3.6/site-packages (from importlib-metadata>=0.12; python_version < "3.8"->pytest) (3.1.0)
+// Requirement already satisfied: six in /opt/python/lib/python3.6/site-packages (from packaging->pytest) (1.15.0)
+
+# pyparsing>=2.0.2
+DL_URL=@PYPI_URL@/
+DL_PKG=pyparsing-2.4.7-py2.py3-none-any.whl (67 kB)
+
+
+DL_URL=https://files.pythonhosted.org/packages/98/db/712bee56f9ab20373508a5a1c662e1db49b407dacf03b5224c6171ed0a3d
+DL_PKG=@ARCHIVENAME@-@VERSION@-py3-none-any.@WHEEL_POSTFIX@
+

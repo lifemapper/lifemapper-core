@@ -1,0 +1,23 @@
+NAME 			= opt-lifemapper-pytest
+ARCHIVENAME 	= pytest
+VERSION 		= 6.0.1
+RELEASE 		= 0
+WHEEL_POSTFIX	= whl
+
+# (ordered) dependencies for pytest
+#     more-itertools        (separate rpm)
+#     py
+#     importlib-metadata
+#     iniconfig
+#     toml
+#     pluggy
+#     attrs
+#     pyparsing
+#     six                   (separate rpm)
+#     packaging
+#     zipp                  (separate rpm)
+#     pytest
+
+RPM.EXTRAS = "AutoReq: no"
+
+RPM.FILES =  $(PKGROOT)/*

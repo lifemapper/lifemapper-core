@@ -1,0 +1,10 @@
+NAME		= opt-lifemapper-zipp
+VERSION		= 3.1.0
+ARCHIVENAME	= zipp
+RELEASE		= 0
+
+RPM.FILES =  $(PKGROOT)/*
+
+# Satisfies dependencies:
+#   importlib-metadata>=0.12; python_version < "3.8"->pytest
+#   importlib-resources; python_version < "3.7"->jaraco.text->jaraco.collections->cherrypy

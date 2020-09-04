@@ -3,6 +3,8 @@ LMHOME			= /opt/lifemapper
 APACHE_TMP	    = /var/www/tmp
 LMURL			= http://yeti.lifemapper.org/dl
 
+PYPI_URL        = https://files.pythonhosted.org/packages
+
 LMDISK          = /share/lm
 LMCOREDISK      = /share/lmcore
 LMSCRATCHDISK	= /state/partition1/lmscratch

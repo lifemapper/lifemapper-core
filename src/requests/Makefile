@@ -83,22 +83,12 @@ prep: prepSrc.sh
 version.mk:
 	cat ../version.mk version.mk.in > version.mk
 
-build:
-	tar xzf  $(ARCHIVENAME)-$(VERSION).tar.gz 
-	(\
-	    cd $(ARCHIVENAME)-$(VERSION);   \
-	    module load opt-python;         \
-	    $(PY.PATH) setup.py build;      \
-	    module unload opt-python;       \
-	)
+build: version.mk
+    echo $(ARCHIVENAME)-$(VERSION)
 
 install::
-	(\
-	    cd $(ARCHIVENAME)-$(VERSION);   \
-	    module load opt-python;         \
-	    $(PY.PATH) setup.py $@ --root=$(ROOT)/; \
-	    module unload opt-python;       \
-	)
+    mkdir -p $(ROOT)/$(PKGROOT)/rocks/etc
+    install -m 664 *.whl $(ROOT)/$(PKGROOT)/rocks/etc
 
 clean::
 	rm -rf $(ARCHIVENAME)-$(VERSION) version.mk prepSrc.sh

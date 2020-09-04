@@ -1,11 +1,10 @@
 NAME		= opt-lifemapper-more-itertools
-VERSION		= 5.0.0
+VERSION     = 8.5.0
 ARCHIVENAME = more-itertools
-RELEASE		= 1
-TARBALL_POSTFIX	= tar.gz
+RELEASE		= 0
 
-RPM.FILES	= $(PYTHON36_PACKAGES)/*
+RPM.FILES =  $(PKGROOT)/*
 
-# 5.0.0 is last version supporting Python2.7
-
-# TODO: update
+# Satisfies dependencies:
+#   from cherrypy
+#   from pytest

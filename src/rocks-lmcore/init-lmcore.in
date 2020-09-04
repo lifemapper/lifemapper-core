@@ -75,8 +75,41 @@ finish_wheel_installs () {
     $PY3 -m pip install --upgrade pip
     WHL_DIR=@PKGROOT@/rocks/etc
 
+    echo "-- install ordered wheel dependencies ..." >> $LOG
+    # Some filenames <> package names (more-itertools, cherrypy)
+    BASE_DEPS="more_itertools six zipp"
+    PYTEST_PLUS_DEPS="py importlib-metadata iniconfig toml pluggy attrs pyparsing packaging pytest"
+    CHERRYPY_PLUS_DEPS="pytz jaraco.functools tempora portend jaraco.classes importlib-resources jaraco.text jaraco.collections cheroot zc.lockfile CherryPy"
+    REQUESTS_DEPS="urllib3 idna certifi chardet requests"
+    
+    for dep in $BASE_DEPS
+        do
+            wname=$WHL_DIR/$dep*whl
+            echo "install base dependency $dep ..." >> $LOG
+            @PYBIN@ -m pip install $wname
+        done
+    for dep in $PYTEST_PLUS_DEPS
+        do
+            wname=$WHL_DIR/$dep*whl
+            echo "install pytest dependency $dep ..." >> $LOG
+            @PYBIN@ -m pip install $wname
+        done
+    if [[ -f $WHL_DIR/CherryPy*whl
+    for dep in $CHERRYPY_PLUS_DEPS
+        do
+            wname=$WHL_DIR/$dep*whl
+            echo "install cherrypy dependency $dep ..." >> $LOG
+            @PYBIN@ -m pip install $wname
+        done
+    for dep in $REQUESTS_DEPS
+        do
+            wname=$WHL_DIR/$dep*whl
+            echo "install requests dependency $dep ..." >> $LOG
+            @PYBIN@ -m pip install $wname
+        done
+
     INSTALLED_PKGS=`$PY3 -m pip list | /usr/bin/grep -v Package | /usr/bin/grep -v "^----" | /usr/bin/awk '{print $1}'`
-    # install rest of wheel files, ignore previously installed files
+    # install any remaining wheel files, ignore previously installed files
     echo "-- install remaining wheel dependencies ..." >> $LOG
     FILES=$WHL_DIR/*whl
     startidx=$((${#WHL_DIR} + 2))
@@ -86,7 +119,7 @@ finish_wheel_installs () {
             # filename prefix sometimes differs from package name
             pkgname=$(echo $f | cut -c$startidx-$filelen | cut -d'-' -f1)
             if [[ ${INSTALLED_PKGS[*]} =~ $pkgname ]]; then
-                echo "$pkgname installed already ..."
+                echo "$pkgname exists ..."
             else
                 echo "install remaining dependency $pkgname ..."
                 $PY3 -m pip install $f
