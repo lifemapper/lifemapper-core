@@ -113,7 +113,6 @@ finish_wheel_installs () {
                 echo "install cherrypy dependency $dep ..." >> $LOG
                 $PY3 -m pip install $wname
             done
-        wname=$WHL_DIR/coverage*whl
         $PY3 -m pip install $wname
     fi
 
