@@ -18,28 +18,6 @@ echo "/opt/python/lib/" >> /etc/ld.so.conf.d/lifemapper-lab-ld.conf
 # pip for wheels
 module load opt-python
 python3.6 -m ensurepip --default-pip
-module unload opt-python
-
-# setuptools and wheel for backports.functools_lru_cache install
-cd src/setuptools
-make prep
-cd ../..
-module load opt-python
-compile setuptools
-module unload opt-python
-install opt-lifemapper-setuptools
-
-cd src/wheel
-make prep
-module load opt-python
-python3.6 -m ensurepip --default-pip
-python3.6 -m pip install *.whl
-cd ../..
-compile wheel
-module unload opt-python
-
-
 # Leave with opt-python loaded
-module load opt-python
 
 

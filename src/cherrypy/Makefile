@@ -58,7 +58,7 @@
 
 REDHAT.ROOT = $(CURDIR)/../../
 -include $(ROCKSROOT)/etc/Rules.mk
-include Rules.mk
+include Rules.mkhttps://www.finecooking.com/recipe/basil-oil
 
 version.mk:
 	cat ../version.mk version.mk.in > version.mk
@@ -68,6 +68,7 @@ PY.PATH = /opt/python/bin/$(PYTHONVER)
 SEDSPEC += \
         -e 's%@ARCHIVENAME@%$(ARCHIVENAME)%g'  \
         -e 's%@VERSION@%$(VERSION)%g'  \
+        -e 's%@PYPI_URL@%$(PYPI_URL)%g'  \
         -e 's%@WHEEL_POSTFIX@%$(WHEEL_POSTFIX)%g'
 
 prepSrc.sh: prepSrc.sh.in
@@ -81,11 +82,11 @@ prep: prepSrc.sh
 	./prepSrc.sh
 
 build: version.mk
-    echo $(ARCHIVENAME)-$(VERSION)
+	echo $(ARCHIVENAME)-$(VERSION)
 
 install::
-    mkdir -p $(ROOT)/$(PKGROOT)/rocks/etc
-    install -m 664 *.whl $(ROOT)/$(PKGROOT)/rocks/etc
+	mkdir -p $(ROOT)/$(PKGROOT)/rocks/etc
+	install -m 664 *.whl $(ROOT)/$(PKGROOT)/rocks/etc
 
 clean::
 	rm -rf $(ARCHIVENAME)-$(VERSION) version.mk prepSrc.sh

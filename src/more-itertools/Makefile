@@ -68,6 +68,7 @@ PY.PATH = /opt/python/bin/$(PYTHONVER)
 SEDSPEC += \
         -e 's%@ARCHIVENAME@%$(ARCHIVENAME)%g'  \
         -e 's%@VERSION@%$(VERSION)%g'  \
+        -e 's%@PYPI_URL@%$(PYPI_URL)%g'  \
         -e 's%@WHEEL_POSTFIX@%$(WHEEL_POSTFIX)%g'
 
 prepSrc.sh: prepSrc.sh.in
@@ -81,11 +82,11 @@ prep: prepSrc.sh
 	./prepSrc.sh
 
 build: 
-    echo $(ARCHIVENAME)-$(VERSION)
+	echo $(ARCHIVENAME)-$(VERSION)
 
 install::
-    mkdir -p $(ROOT)/$(PKGROOT)/rocks/etc
-    install -m 664 $(ARCHIVENAME)-$(VERSION)-py3-none-any.$(WHEEL_POSTFIX) $(ROOT)/$(PKGROOT)/rocks/etc
+	mkdir -p $(ROOT)/$(PKGROOT)/rocks/etc
+	install -m 664 $(ARCHIVENAME)-$(VERSION)-py3-none-any.$(WHEEL_POSTFIX) $(ROOT)/$(PKGROOT)/rocks/etc
 
 clean::
 	rm -rf $(ARCHIVENAME)-$(VERSION) version.mk prepSrc.sh

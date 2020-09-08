@@ -73,8 +73,8 @@ install::
 	mkdir -p $(ROOT)/etc/rc.d/init.d
 	$(INSTALL) -m 755 solr $(ROOT)/etc/rc.d/init.d
 
-    mkdir -p $(ROOT)/$(PKGROOT)/rocks/bin
-    install -m 755 solr-index $(ROOT)/$(PKGROOT)/rocks/bin
+	mkdir -p $(ROOT)/$(PKGROOT)/rocks/bin
+	install -m 755 solr-index $(ROOT)/$(PKGROOT)/rocks/bin
 
 clean::
 	rm -rf $(ARCHIVENAME)-$(VERSION) 
