@@ -2,7 +2,7 @@
 
 # more-itertools (from cherrypy, pytest)
 DL_URL=@PYPI_URL@/ec/f7/9c33f38577d9fb9b1aa60c0fd9961d09574f5d47d2b830e5183e6adfc8cc
-DL_PKG=$(ARCHIVENAME)-$(VERSION)-py3-none-any.@WHEEL_POSTFIX@
+DL_PKG=@ARCHIVENAME@-@VERSION@-py3-none-any.@WHEEL_POSTFIX@
 
 
 get_wheel_file () {

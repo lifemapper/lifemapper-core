@@ -58,7 +58,7 @@
 
 REDHAT.ROOT = $(CURDIR)/../../
 -include $(ROCKSROOT)/etc/Rules.mk
-include Rules.mkhttps://www.finecooking.com/recipe/basil-oil
+include Rules.mk
 
 version.mk:
 	cat ../version.mk version.mk.in > version.mk

@@ -7,7 +7,7 @@
 # Requirement already satisfied: more-itertools>=4.0.0 (from pytest) (8.5.0)
 # py>=1.8.2
 D1_URL=@PYPI_URL@/68/0f/41a43535b52a81e4f29e420a151032d26f08b62206840c48d14b70e53376
-D1_PKG=py-1.9.0-py2.py3-none-any.whl
+D1_PKG=py-1.9.0-py2.py3-none-any.@WHEEL_POSTFIX@
 
 #  importlib-metadata>=0.12; python_version < "3.8"
 D2_URL=@PYPI_URL@/8e/58/cdea07eb51fc2b906db0968a94700866fc46249bdc75cac23f9d13168929
@@ -50,7 +50,7 @@ D10_URL=@PYPI_URL@/98/db/712bee56f9ab20373508a5a1c662e1db49b407dacf03b5224c6171e
 D10_PKG=pytest-6.0.1-py3-none-any.@WHEEL_POSTFIX@
 
 DL_URL=@PYPI_URL@/e5/18/401594af67eda194a8b9167208621761927c937db7d60292608342bbac0a
-DL_PKG=pytest_cov-@VERSION@-py2.py3-none-any.whl
+DL_PKG=@ARCHIVENAME@-@VERSION@-py2.py3-none-any.@WHEEL_POSTFIX@
 
 get_wheel_files () {
   echo "Fetch @ARCHIVENAME@ dependencies"
