@@ -1,8 +1,12 @@
 NAME 			= opt-lifemapper-pytest-cov
+<<<<<<< HEAD
 ARCHIVENAME 	= pytest_cov
+=======
+ARCHIVENAME		= pytest_cov
+>>>>>>> ad351ed25577ebcec0494c0c7f7a7923ddbafc82
 VERSION 		= 2.10.1
 RELEASE 		= 0
-WHEEL_POSTFIX   = whl
+WHEEL_POSTFIX		= whl
 
 # (ordered) dependencies for pytest-cov
 #     coverage
