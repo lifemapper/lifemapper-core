@@ -24,8 +24,9 @@
     <package>javapackages-tools</package>
     <package>lksctp-tools</package>
     <package>pcsc-lite-libs</package>
-    <package>python-lxml</package>
+    <!-- <package>python-ipaddress</package> -->
     <package>python-javapackages</package>
+    <package>python-lxml</package>
     <package>tzdata-java</package>
     
     <!-- lifemapper common python dependencies -->
