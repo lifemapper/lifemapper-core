@@ -45,6 +45,7 @@ set_defaults() {
    
     PROFILE=/var/lib/pgsql/.bash_profile
     BIN=@PKGROOT@/rocks/bin
+    WHL_DIR=@PKGROOT@/rocks/etc
     PY3=@PYBIN@
     
     # Source function library.
@@ -74,48 +75,47 @@ set_permissions () {
     done
 }
 
-# Install all python wheel files with pip
-finish_wheel_installs () {
-    $PY3 -m ensurepip --default-pip
-    $PY3 -m pip install --upgrade pip
-    WHL_DIR=@PKGROOT@/rocks/etc
-
-    echo "-- install ordered wheel dependencies ..." >> $LOG
-    # Some filenames <> package names (more-itertools, pytest-cov, cherrypy)
+# Ordered installations use included wheel files
+order_wheel_installs () {
+    # Some filenames <> package names (more-itertools, cherrypy, etc)
     BASE_DEPS="more_itertools six zipp"
-    PYTESTCOV_PLUS_DEPS="coverage py importlib-metadata iniconfig toml pluggy attrs pyparsing packaging pytest pytest_cov"
-    CHERRYPY_PLUS_DEPS="pytz jaraco.functools tempora portend jaraco.classes importlib-resources jaraco.text jaraco.collections cheroot zc.lockfile CherryPy"
+    PYTESTCOV_PLUS_DEPS="coverage py importlib_metadata iniconfig toml pluggy attrs pyparsing packaging pytest pytest_cov"
+    CHERRYPY_PLUS_DEPS="pytz jaraco.functools tempora portend jaraco.classes importlib_resources jaraco.text jaraco.collections cheroot zc.lockfile CherryPy"
     REQUESTS_DEPS="urllib3 idna certifi chardet requests"
-    
+
+    echo "-- install ordered wheel dependencies ..." 
     for dep in $BASE_DEPS
         do
             wname=$WHL_DIR/$dep*whl
-            echo "install base dependency $dep ..." >> $LOG
+            echo "install common dependency $dep ..." >> $LOG
             $PY3 -m pip install $wname
         done
-    for dep in $PYTEST_PLUS_DEPS
+    for dep in $PYTESTCOV_PLUS_DEPS
         do
             wname=$WHL_DIR/$dep*whl
-            echo "install pytest dependency $dep ..." >> $LOG
+            echo "install pytest-cov ordered dependency $dep ..." >> $LOG
+            $PY3 -m pip install $wname
+        done
+    for dep in $CHERRYPY_PLUS_DEPS
+        do
+            wname=$WHL_DIR/$dep*whl
+            echo "install cherrypy ordered dependency $dep ..." >> $LOG
             $PY3 -m pip install $wname
         done
     for dep in $REQUESTS_DEPS
         do
             wname=$WHL_DIR/$dep*whl
-            echo "install requests dependency $dep ..." >> $LOG
+            echo "install requests ordered dependency $dep ..." >> $LOG
             $PY3 -m pip install $wname
         done
-    
-    if [ $MEMBERSHIP = Frontend ]; then
-        for dep in $CHERRYPY_PLUS_DEPS
-            do
-                wname=$WHL_DIR/$dep*whl
-                echo "install cherrypy dependency $dep ..." >> $LOG
-                $PY3 -m pip install $wname
-            done
-        $PY3 -m pip install $wname
-    fi
+}
 
+# Install all python wheel files with pip
+install_wheels () {
+    $PY3 -m ensurepip --default-pip
+    $PY3 -m pip install --upgrade pip
+    
+    order_wheel_installs 
 
     INSTALLED_PKGS=`$PY3 -m pip list | /usr/bin/grep -v Package | /usr/bin/grep -v "^----" | /usr/bin/awk '{print $1}'`
     # install any remaining wheel files, ignore previously installed files
@@ -128,9 +128,9 @@ finish_wheel_installs () {
             # filename prefix sometimes differs from package name
             pkgname=$(echo $f | cut -c$startidx-$filelen | cut -d'-' -f1)
             if [[ ${INSTALLED_PKGS[*]} =~ $pkgname ]]; then
-                echo "$pkgname exists ..."
+                echo "$pkgname exists ..." >> $LOG
             else
-                echo "install remaining dependency $pkgname ..."
+                echo "install remaining dependency $pkgname ..." >> $LOG
                 $PY3 -m pip install $f
             fi
         done
@@ -172,7 +172,8 @@ TimeStamp () {
 set_defaults
 TimeStamp "# Start"
 
-finish_wheel_installs
+install_wheels
+# finish_wheel_installs
 set_permissions
 # install_cron_jobs
 update_config
