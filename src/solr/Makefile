@@ -55,30 +55,30 @@ build: $(SCRIPTS)
 
 install::
 	mkdir -p $(ROOT)/$(SOLRDIR)
-	tar -xzf  $(ARCHIVENAME)-$(VERSION).$(TARBALL_POSTFIX)  -C  $(ROOT)/$(SOLRDIR) --strip 1 --exclude docs --exclude contrib	
-
-    mkdir -p $(ROOT)/etc/default
-    cat $(ROOT)/$(SOLRDIR)/bin/solr.in.sh solr.txt > $(ROOT)/etc/default/solr.in.sh
-    mv $(ROOT)/$(SOLRDIR)/bin/solr.in.sh  $(ROOT)/$(SOLRDIR)/bin/solr.in.sh.orig  
-    chown root:$(SOLRUSER) $(ROOT)/etc/default/solr.in.sh
-    chmod 0640 $(ROOT)/etc/default/solr.in.sh
-
-    mkdir -p $(ROOT)/$(SOLRDATA)/cores
+	tar -xzf  $(ARCHIVENAME)-$(VERSION)-src.$(TARBALL_POSTFIX)  -C  $(ROOT)/$(SOLRDIR) --strip 1 --exclude docs --exclude contrib
+	
+	mkdir -p $(ROOT)/etc/default
+	cat $(ROOT)/$(SOLRDIR)/bin/solr.in.sh solr.txt > $(ROOT)/etc/default/solr.in.sh
+	mv $(ROOT)/$(SOLRDIR)/bin/solr.in.sh  $(ROOT)/$(SOLRDIR)/bin/solr.in.sh.orig  
+	chown root:$(SOLRUSER) $(ROOT)/etc/default/solr.in.sh
+	chmod 0640 $(ROOT)/etc/default/solr.in.sh
+	
+	mkdir -p $(ROOT)/$(SOLRDATA)/cores
 	mkdir -p $(ROOT)/$(SOLRDATA)/logs
 	mkdir -p $(ROOT)/$(SOLRDATA)/data
-    cp $(ROOT)/$(SOLRDIR)/server/solr/solr.xml $(ROOT)/$(SOLRDATA)/data
-    cp $(ROOT)/$(SOLRDIR)/server/solr/zoo.cfg $(ROOT)/$(SOLRDATA)/data
-    cp $(ROOT)/$(SOLRDIR)/server/resources/log4j2.xml  $(ROOT)/$(SOLRDATA)/data
-
+	cp $(ROOT)/$(SOLRDIR)/server/solr/solr.xml $(ROOT)/$(SOLRDATA)/data
+	cp $(ROOT)/$(SOLRDIR)/server/solr/zoo.cfg $(ROOT)/$(SOLRDATA)/data
+	cp $(ROOT)/$(SOLRDIR)/server/resources/log4j2.xml  $(ROOT)/$(SOLRDATA)/data
+	
 	mkdir -p $(ROOT)/$(JTSDIR)
 	cp  $(JTS)  $(ROOT)/$(JTSDIR)/
 	
 	mkdir -p $(ROOT)/etc/security/limits.d/
 	install -m 644 solr.lmcore.conf $(ROOT)/etc/security/limits.d
-   
+	
 	mkdir -p $(ROOT)/etc/rc.d/init.d
 	$(INSTALL) -m 755 solr $(ROOT)/etc/rc.d/init.d
-
+	
 	mkdir -p $(ROOT)/$(PKGROOT)/rocks/bin
 	install -m 755 solr-index $(ROOT)/$(PKGROOT)/rocks/bin
 
