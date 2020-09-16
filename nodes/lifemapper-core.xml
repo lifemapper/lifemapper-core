@@ -50,6 +50,12 @@ fi
 /usr/sbin/usermod -G lmwriter apache
 
 
+/bin/mkdir -p           /var/solr/cores
+/bin/mkdir -p           /var/solr/data
+/bin/mkdir -p           /var/solr/logs
+/bin/chown -R solr:solr /var/solr
+/bin/chmod -R 755       /var/solr
+
 # FE directory NOT exported to /share, for web logs, uploads, cherrypy sessions
 /bin/mkdir -p          /state/partition1/lmscratch/log/apache
 /bin/mkdir -p          /state/partition1/lmscratch/sessions

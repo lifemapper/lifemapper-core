@@ -38,7 +38,8 @@ del-lifemapper() {
     $RM opt-lifemapper-requests
     $RM rocks-lmcore
     $RM opt-lifemapper-six
-    $RM opt-lifemapper-solr
+    # in del-solr
+    # $RM opt-lifemapper-solr
     $RM opt-lifemapper-zipp
     $RM roll-lifemapper-core-usersguide
     $RM roll-lifemapper-core-kickstart
@@ -74,16 +75,6 @@ del-shared-user-group () {
     $ROCKS_CMD sync users
 }
 
-# stop services if running
-stop-services () {
-    SOLR_PROCESSES=`ps -Af | grep solr | grep -v "grep" | wc -l`
-    if [[ $LMSERVER_ROLL_COUNT -eq 0 && $SOLR_PROCESSES -eq 1 ]]; then
-        echo "-- stop Solr process " >> $LOG
-        # uses service instead of systemctl
-        /usr/bin/systemctl stop solr
-    fi    
-}
-
 del-config () {
     echo "Removing system configuration files used by lifemapper" >> $LOG
     rm -rf  /etc/ld.so.conf.d/lifemapper-core-ld.conf
@@ -91,13 +82,29 @@ del-config () {
 }
 
 del-directories () {   
-   echo "Removing dirs" >> $LOG
+   echo "Removing apache dirs" >> $LOG
    rm -rf /state/partition1/lmscratch/log/apache
    rm -rf /state/partition1/lmscratch/sessions
    rm -rf /state/partition1/lmscratch/tmpUpload
    
    echo "Removing data directories" >> $LOG
    rm -rf /state/partition1/lmcore
+}
+
+del-solr () {
+    SOLR_PROCESSES=`ps -Af | grep solr | grep -v "grep" | wc -l`
+    if [[ $SOLR_PROCESSES -eq 1 ]]; then
+        echo "-- stop Solr process " >> $LOG
+        # uses service instead of systemctl
+        /usr/sbin/service solr stop
+    fi    
+
+    $RM opt-lifemapper-solr
+    echo "Removing solr configuration and directories" >> $LOG
+    rm -f /etc/default/solr.in.sh
+    rm -f /etc/security/limits.d/solr.lmcore.conf
+    rm -rf /var/solr
+    rm -rf /opt/solr
 }
 
 del-webstuff () {

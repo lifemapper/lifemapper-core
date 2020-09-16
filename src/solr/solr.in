@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 # Licensed to the Apache Software Foundation (ASF) under one or more
 # contributor license agreements.  See the NOTICE file distributed with
 # this work for additional information regarding copyright ownership.
@@ -14,26 +14,41 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-### BEGIN INIT INFO
-# Provides: solr
-# Required-Start:    $remote_fs $syslog
-# Required-Stop:     $remote_fs $syslog
-# Default-Start:     2 3 4 5
-# Default-Stop:      0 1 6
-# Description:       Controls Apache Solr as a Service
-### END INIT INFO
 
-# Example of a very simple *nix init script that delegates commands to the bin/solr script
-# Typical usage is to do:
+# CONTROLLING STARTUP:
 #
-#   cp bin/init.d/solr /etc/init.d/solr
-#   chmod 755 /etc/init.d/solr
-#   chown root:root /etc/init.d/solr
-#   update-rc.d solr defaults
-#   update-rc.d solr enable
+# Use solr -help to see available command-line options. In addition
+# to passing command-line options, this script looks for an include
+# file named solr.in.sh to set environment variables. Specifically,
+# the following locations are searched in this order:
+#
+# ./
+# $HOME/.solr.in.sh
+# /usr/share/solr
+# /usr/local/share/solr
+# /var/solr/
+# /opt/solr
+#
+# Another option is to specify the full path to the include file in the
+# environment. For example:
+#
+#   $ SOLR_INCLUDE=/path/to/solr.in.sh solr start
+#
+# Note: This is particularly handy for running multiple instances on a
+# single installation, or for quick tests.
+#
+# Finally, developers and enthusiasts who frequently run from an SVN
+# checkout, and do not want to locally modify bin/solr.in.sh, can put
+# a customized include file at ~/.solr.in.sh.
+#
+# If you would rather configure startup entirely from the environment, you
+# can disable the include by exporting an empty SOLR_INCLUDE, or by
+# ensuring that no include files exist in the aforementioned search list.
 
-# Where you extracted the Solr distribution bundle
 SOLR_INSTALL_DIR=@SOLRDIR@
+SOLR_PORT=@SOLR_PORT@
+SOLR_PORT2=@SOLR_PORT2@
+ZOOKEEPER_PORT=@ZOOKEEPER_PORT@
 
 if [ ! -d "$SOLR_INSTALL_DIR" ]; then
   echo "$SOLR_INSTALL_DIR not found! Please check the SOLR_INSTALL_DIR setting in your $0 script."
@@ -44,7 +59,7 @@ fi
 # variables used by the bin/solr script. It's highly recommended to define this script so
 # that you can keep the Solr binary files separated from live files (pid, logs, index data, etc)
 # see bin/solr.in.sh for an example
-SOLR_ENV=@SOLRDIR@/etc/solrenv.sh
+SOLR_ENV=/etc/default/solr.in.sh
 
 if [ ! -f "$SOLR_ENV" ]; then
   echo "$SOLR_ENV not found! Please check the SOLR_ENV setting in your $0 script."
@@ -71,9 +86,20 @@ case "$1" in
     exit
 esac
 
+# Runs solr in cloud mode on 2 ports of localhost (TESTING ONLY)
+SOLR_SCRIPT="$SOLR_INSTALL_DIR/bin/solr"
 if [ -n "$RUNAS" ]; then
-  su -c "SOLR_INCLUDE=$SOLR_ENV $SOLR_INSTALL_DIR/bin/solr $SOLR_CMD" - $RUNAS
+    if [[ $SOLR_CMD = start || $SOLR_CMD = restart  ]]; then
+        su -c "SOLR_INCLUDE=$SOLR_ENV   $SOLR_SCRIPT $SOLR_CMD -c -p $SOLR_PORT" - $RUNAS
+        # Zookeeper connection string in SOLR_ENV
+        su -c "SOLR_INCLUDE=$SOLR_ENV   $SOLR_SCRIPT $SOLR_CMD -c -p $SOLR_PORT2" - $RUNAS
+    elif [[ $SOLR_CMD = stop  ]]; then
+        su -c "SOLR_INCLUDE=$SOLR_ENV   $SOLR_SCRIPT $SOLR_CMD -p $SOLR_PORT" - $RUNAS
+        su -c "SOLR_INCLUDE=$SOLR_ENV   $SOLR_SCRIPT $SOLR_CMD -p $SOLR_PORT2" - $RUNAS
+    else
+        su -c "SOLR_INCLUDE=$SOLR_ENV   $SOLR_SCRIPT $SOLR_CMD" - $RUNAS
+    fi
 else
-  SOLR_INCLUDE=$SOLR_ENV $SOLR_INSTALL_DIR/bin/solr $SOLR_CMD
+    SOLR_INCLUDE=$SOLR_ENV   $SOLR_SCRIPT $SOLR_CMD
 fi
 

@@ -74,14 +74,6 @@ fi
 </post>
 
 <post>
-
-/bin/mkdir -p          /state/partition1/lm/solr/data/cores
-/bin/mkdir -p          /state/partition1/lm/solr/data/logs
-
-# reset solr permissions
-/bin/chown -R solr:solr /state/partition1/lm/solr
-/bin/chmod -R 775       /state/partition1/lm/solr
-
 # Node directory NOT shared from frontend
 /bin/mkdir -p /state/partition1/lmscratch/.java/.systemPrefs
 /bin/mkdir -p /state/partition1/lmscratch/.java/.userPrefs
@@ -98,7 +90,6 @@ fi
 /sbin/ldconfig
 /opt/lifemapper/rocks/bin/init-lmcore
 rm -rf /etc/rc.d/rocksconfig.d/post-99-lifemapper-core
-
 </file>
 
 </post>
