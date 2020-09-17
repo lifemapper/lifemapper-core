@@ -136,6 +136,16 @@ install_wheels () {
         done
 }
 
+finish_solr_install () {
+    echo "-- update solr permissions" >> $LOG
+    /usr/bin/chown root:solr /etc/default/solr.in.sh
+    /usr/bin/chmod 0640 /etc/default/solr.in.sh
+    
+    echo "-- update solr index" >> $LOG
+    $BIN/update-lmcore >> $LOG  2>&1
+}
+
+
 # update linker paths
 run_ldconfig () {
     echo "-- run ldconfig" >> $LOG
@@ -157,10 +167,9 @@ install_cron_jobs () {
     echo "-- End install-lmcore-cron" >> $LOG
 }
 
-# run updateCfg to put correct IP, makeflow parameters lmcore's config.lmcore.ini 
+# run update_config to put correct IP, makeflow parameters lmcore's config.lmcore.ini 
 update_config() {
-    echo "-- update solr index" >> $LOG
-    $BIN/update-lmcore >> $LOG  2>&1
+    echo "-- update any configuration here" >> $LOG
 }
 
 
@@ -173,7 +182,7 @@ set_defaults
 TimeStamp "# Start"
 
 install_wheels
-# finish_wheel_installs
+finish_solr_install
 set_permissions
 # install_cron_jobs
 update_config

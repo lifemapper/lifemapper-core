@@ -60,8 +60,6 @@ install::
 	mkdir -p $(ROOT)/etc/default
 	cat $(ROOT)/$(SOLRDIR)/bin/solr.in.sh solr.txt > $(ROOT)/etc/default/solr.in.sh
 	mv $(ROOT)/$(SOLRDIR)/bin/solr.in.sh  $(ROOT)/$(SOLRDIR)/bin/solr.in.sh.orig  
-	chown root:$(SOLRUSER) $(ROOT)/etc/default/solr.in.sh
-	chmod 0640 $(ROOT)/etc/default/solr.in.sh
 	
 	mkdir -p $(ROOT)/$(SOLRDATA)/cores
 	mkdir -p $(ROOT)/$(SOLRDATA)/logs
