@@ -7,8 +7,8 @@
 # JTS_URL="http://central.maven.org/maven2/org/locationtech/jts/jts-core/1.15.0/"
 
 SRC_URL=http://archive.apache.org/dist/lucene/@ARCHIVENAME@/@VERSION@
-SRC_PKG=@ARCHIVENAME@-@VERSION@.@TARBALL_POSTFIX@
-SRC_SHA=@ARCHIVENAME@-@VERSION@.@TARBALL_POSTFIX@.sha512
+SRC_PKG=@ARCHIVENAME@-@VERSION@-src.@TARBALL_POSTFIX@
+SRC_SHA=@ARCHIVENAME@-@VERSION@-src.@TARBALL_POSTFIX@.sha512
 
 get_source_file () {
   echo "Fetch @ARCHIVENAME@ code"
