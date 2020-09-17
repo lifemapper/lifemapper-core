@@ -55,7 +55,7 @@ build: $(SCRIPTS)
 
 install::
 	mkdir -p $(ROOT)/$(SOLRDIR)
-	tar -xzf  $(ARCHIVENAME)-$(VERSION)-src.$(TARBALL_POSTFIX)  -C  $(ROOT)/$(SOLRDIR) --strip 1 --exclude docs --exclude contrib
+	tar xzf  $(ARCHIVENAME)-$(VERSION)-src.$(TARBALL_POSTFIX)  -C  $(ROOT)/$(SOLRDIR) --strip 2 --exclude=dev-docs --exclude=dev-tools --exclude=lucene
 	
 	mkdir -p $(ROOT)/etc/default
 	cat $(ROOT)/$(SOLRDIR)/bin/solr.in.sh solr.txt > $(ROOT)/etc/default/solr.in.sh
