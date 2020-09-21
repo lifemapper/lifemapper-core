@@ -48,7 +48,6 @@
 SOLR_INSTALL_DIR=@SOLRDIR@
 SOLR_PORT=@SOLR_PORT@
 SOLR_PORT2=@SOLR_PORT2@
-ZOOKEEPER_PORT=@ZOOKEEPER_PORT@
 
 if [ ! -d "$SOLR_INSTALL_DIR" ]; then
   echo "$SOLR_INSTALL_DIR not found! Please check the SOLR_INSTALL_DIR setting in your $0 script."

@@ -54,12 +54,6 @@ else
     /usr/sbin/useradd -c "Lifemapper user" -g lmwriter lmwriter
 fi
 
-# set up solr user
-ID=`/bin/egrep -i "^solr" /etc/group`
-if [ "$ID" == "" ] ; then
-    # adding solr user
-    /usr/sbin/useradd -c "Solr user" solr
-fi
 
 # Sync users on Frontend
 HN=`eval hostname`

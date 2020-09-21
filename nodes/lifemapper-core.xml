@@ -49,6 +49,12 @@ fi
 # for writing web logs
 /usr/sbin/usermod -G lmwriter apache
 
+# set up solr user
+ID=`/bin/egrep -i "^solr" /etc/group`
+if [ "$ID" == "" ] ; then
+    # adding solr user
+    /usr/sbin/adduser --system --user-group --create-home --home-dir /var/solr solr
+fi
 
 /bin/mkdir -p           /var/solr/cores
 /bin/mkdir -p           /var/solr/data
