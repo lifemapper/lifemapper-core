@@ -56,15 +56,15 @@ install::
 	mkdir -p $(ROOT)/$(SOLRDIR)
 	tar -xzf  $(ARCHIVENAME)-$(VERSION).$(TARBALL_POSTFIX)  -C  $(ROOT)/$(SOLRDIR) --strip 1 --exclude docs --exclude contrib	
 
-	mkdir -p $(ROOT)/$(SOLRDATA)/data
+    mkdir -p $(ROOT)/$(SOLRDATA)/data
+    mkdir -p $(ROOT)/$(SOLRDATA)/cores
+    mkdir -p $(ROOT)/$(SOLRDATA)/logs
     cp $(ROOT)/$(SOLRDIR)/server/solr/solr.xml $(ROOT)/$(SOLRDATA)/data
     cp $(ROOT)/$(SOLRDIR)/server/solr/zoo.cfg $(ROOT)/$(SOLRDATA)/data
     cp $(ROOT)/$(SOLRDIR)/server/resources/log4j2.xml  $(ROOT)/$(SOLRDATA)/log4j2.xml
 
 	mkdir -p $(ROOT)/etc/default/
 	cat $(ROOT)/$(SOLRDIR)/bin/solr.in.sh solr.txt > $(ROOT)/etc/default/solr.in.sh
-    chown root:solr $(ROOT)/etc/default/solr.in.sh
-    chmod 640 $(ROOT)/etc/default/solr.in.sh
 
 	mkdir -p $(ROOT)/$(JTSDIR)
 	cp  $(JTS)  $(ROOT)/$(JTSDIR)/

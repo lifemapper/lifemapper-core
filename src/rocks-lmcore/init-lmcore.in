@@ -139,7 +139,7 @@ install_wheels () {
 finish_solr_install () {
     echo "-- update solr permissions" >> $LOG
     /usr/bin/chown root:solr /etc/default/solr.in.sh
-    /usr/bin/chmod 0640 /etc/default/solr.in.sh
+    /usr/bin/chmod 640 /etc/default/solr.in.sh
     
     echo "-- update solr index" >> $LOG
     $BIN/update-lmcore >> $LOG  2>&1
