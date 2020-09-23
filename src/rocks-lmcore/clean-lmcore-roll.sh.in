@@ -32,7 +32,7 @@ set_defaults() {
 del-lifemapper() {
     echo "Removing lifemapper-* and prerequisite RPMS" >> $LOG
     $RM opt-lifemapper-cherrypy
-    $RM opt-lifemapper-mod-wsgi
+    $RM opt-lifemapper-mod_wsgi
     $RM opt-lifemapper-more-itertools
     $RM opt-lifemapper-pytest-cov
     $RM opt-lifemapper-requests

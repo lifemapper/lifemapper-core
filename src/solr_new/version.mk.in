@@ -1,16 +1,17 @@
 NAME			= lifemapper-solr
 ARCHIVENAME		= solr
-VERSION			= 8.2.0
+VERSION			= 8.6.2
 JTS				= jts-core-1.15.0.jar
-RELEASE			= 1
+RELEASE			= 0
 TARBALL_POSTFIX	= tgz
 
+JTSDIR          = /opt/solr/server/solr-webapp/webapp/WEB-INF/lib
 SOLRDIR			= /opt/solr
-JTSDIR			= /opt/solr/server/solr-webapp/webapp/WEB-INF/lib
-SOLRDATA		= /var/solr
+SOLRDATA        = /var/solr
 SOLRUSER		= solr
 
-SOLR_PORT		= 8983
+## Default Solr node on localhost
+SOLR_PORT       = 8983
 ## Second solr node (testing on localhost)
 SOLR_PORT2      = 7574
 ## Zookeeper connection string; 
@@ -19,9 +20,11 @@ SOLR_PORT2      = 7574
 ZK_HOST         = localhost:9983
 
 RPM.FILES =  \
-    $(PKGROOT)/*                \n\
-    $(SOLRDIR)/*                \n\
-    $(SOLRDATA)/*               \n\
+    $(PKGROOT)/*  \n\
+    /etc/security/limits.d/solr.lmcore.conf  \n\
     /etc/default/solr.in.sh     \n\
     /etc/rc.d/init.d/solr       \n\
-    /etc/security/limits.d/lifemapper.solr.conf
+    $(SOLRDIR)/*                \n\
+    $(SOLRDATA)/*
+
+# Check ports with netstat -tulnp | grep 8983

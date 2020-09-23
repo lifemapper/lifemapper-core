@@ -60,7 +60,8 @@ fi
 /bin/mkdir -p           /var/solr/data
 /bin/mkdir -p           /var/solr/logs
 /bin/chown -R solr:solr /var/solr
-/bin/chmod -R 755       /var/solr
+/usr/bin/find           /var/solr -type d -print0 | xargs -0 chmod 0750
+/usr/bin/find           /var/solr -type f -print0 | xargs -0 chmod 0640
 
 # FE directory NOT exported to /share, for web logs, uploads, cherrypy sessions
 /bin/mkdir -p          /state/partition1/lmscratch/log/apache
