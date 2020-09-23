@@ -65,16 +65,17 @@ install::
 
 	mkdir -p $(ROOT)/etc/default/
 	cat $(ROOT)/$(SOLRDIR)/bin/solr.in.sh solr.txt > $(ROOT)/etc/default/solr.in.sh
+	chmod 640 $(ROOT)/etc/default/solr.in.sh
 
 	mkdir -p $(ROOT)/$(JTSDIR)
 	cp  $(JTS)  $(ROOT)/$(JTSDIR)/
 	
 	mkdir -p $(ROOT)/etc/security/limits.d/
 	install -m 644 lifemapper.solr.conf $(ROOT)/etc/security/limits.d
-   
+	
 	mkdir -p $(ROOT)/etc/rc.d/init.d
 	$(INSTALL) -m 755 solr $(ROOT)/etc/rc.d/init.d
-
+	
 	mkdir -p $(ROOT)/$(LMHOME)/rocks/bin
 	$(INSTALL) -m 755 solr-index  $(ROOT)/$(LMHOME)/rocks/bin
 
