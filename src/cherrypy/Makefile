@@ -69,7 +69,18 @@ SEDSPEC += \
         -e 's%@ARCHIVENAME@%$(ARCHIVENAME)%g'  \
         -e 's%@VERSION@%$(VERSION)%g'  \
         -e 's%@PYPI_URL@%$(PYPI_URL)%g'  \
-        -e 's%@WHEEL_POSTFIX@%$(WHEEL_POSTFIX)%g'
+        -e 's%@WHEEL_POSTFIX@%$(WHEEL_POSTFIX)%g'  \
+        -e 's%@PYTZ@%$(PYTZ)%g'  \
+        -e 's%@JFUNCTOOLS@%$(JFUNCTOOLS)%g'  \
+        -e 's%@TEMPORA@%$(TEMPORA)%g'  \
+        -e 's%@PORTEND@%$(PORTEND)%g'  \
+        -e 's%@JCLASSES@%$(JCLASSES)%g'  \
+        -e 's%@IMPLIB@%$(IMPLIB)%g'  \
+        -e 's%@JTEXT@%$(JTEXT)%g'  \
+        -e 's%@JCOLLECTIONS@%$(JCOLLECTIONS)%g'  \
+        -e 's%@CHEROOT@%$(CHEROOT)%g'  \
+        -e 's%@ZC@%$(ZC)%g'  \
+        -e 's%@SETUPT@%$(SETUPT)%g'
 
 prepSrc.sh: prepSrc.sh.in
 	$(SED) $(SEDSPEC) $^ > $@
@@ -86,17 +97,17 @@ build: version.mk
 
 install::
 	mkdir -p $(ROOT)/$(PYTHON36_PACKAGES)
-	unzip $(PYTZ_URL)/$(PYTZ_PKG) -d $(ROOT)/$(PYTHON36_PACKAGES)
-	unzip $(JFUNCTOOLS_URL)/$(JFUNCTOOLS_PKG) -d $(ROOT)/$(PYTHON36_PACKAGES)
-	unzip $(TEMPORA_URL)/$(TEMPORA_PKG) -d $(ROOT)/$(PYTHON36_PACKAGES)
-	unzip $(PORTEND_URL)/$(PORTEND_PKG) -d $(ROOT)/$(PYTHON36_PACKAGES)
-	unzip $(JCLASSES_URL)/$(JCLASSES_PKG) -d $(ROOT)/$(PYTHON36_PACKAGES)
-	unzip $(IMPLIB_URL)/$(IMPLIB_PKG) -d $(ROOT)/$(PYTHON36_PACKAGES)
-	unzip $(JTEXT_URL)/$(JTEXT_PKG) -d $(ROOT)/$(PYTHON36_PACKAGES)
-	unzip $(JCOLLECTIONS_URL)/$(JCOLLECTIONS_PKG) -d $(ROOT)/$(PYTHON36_PACKAGES)
-	unzip $(CHEROOT_URL)/$(CHEROOT_PKG) -d $(ROOT)/$(PYTHON36_PACKAGES)
-	unzip $(ZC_URL)/$(ZC_PKG) -d $(ROOT)/$(PYTHON36_PACKAGES)
-	unzip $(SETUPT_URL)/$(SETUPT_PKG) -d $(ROOT)/$(PYTHON36_PACKAGES)
+	unzip $(PYTZ_URL)/$(PYTZ) -d $(ROOT)/$(PYTHON36_PACKAGES)
+	unzip $(JFUNCTOOLS_URL)/$(JFUNCTOOLS) -d $(ROOT)/$(PYTHON36_PACKAGES)
+	unzip $(TEMPORA_URL)/$(TEMPORA) -d $(ROOT)/$(PYTHON36_PACKAGES)
+	unzip $(PORTEND_URL)/$(PORTEND) -d $(ROOT)/$(PYTHON36_PACKAGES)
+	unzip $(JCLASSES_URL)/$(JCLASSES) -d $(ROOT)/$(PYTHON36_PACKAGES)
+	unzip $(IMPLIB_URL)/$(IMPLIB) -d $(ROOT)/$(PYTHON36_PACKAGES)
+	unzip $(JTEXT_URL)/$(JTEXT) -d $(ROOT)/$(PYTHON36_PACKAGES)
+	unzip $(JCOLLECTIONS_URL)/$(JCOLLECTIONS) -d $(ROOT)/$(PYTHON36_PACKAGES)
+	unzip $(CHEROOT_URL)/$(CHEROOT) -d $(ROOT)/$(PYTHON36_PACKAGES)
+	unzip $(ZC_URL)/$(ZC) -d $(ROOT)/$(PYTHON36_PACKAGES)
+	unzip $(SETUPT_URL)/$(SETUPT) -d $(ROOT)/$(PYTHON36_PACKAGES)
 	unzip $(ARCHIVENAME)-$(VERSION)-py2.py3-none-any.$(WHEEL_POSTFIX) -d $(ROOT)/$(PYTHON36_PACKAGES)
 
 clean::
