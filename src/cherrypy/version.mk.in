@@ -20,5 +20,4 @@ SETUPT      = setuptools-50.2.0-py3-none-any.$(WHEEL_POSTFIX)
 #     zipp              (separate rpm)
 #     six               (separate rpm)
 
-RPM.FILES =  $(PYTHON36_PACKAGES)/*
-
+RPM.FILES =  $(PKGROOT)/*

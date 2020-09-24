@@ -96,19 +96,8 @@ build: version.mk
 	echo $(ARCHIVENAME)-$(VERSION)
 
 install::
-	mkdir -p $(ROOT)/$(PYTHON36_PACKAGES)
-	unzip $(PYTZ_URL)/$(PYTZ) -d $(ROOT)/$(PYTHON36_PACKAGES)
-	unzip $(JFUNCTOOLS_URL)/$(JFUNCTOOLS) -d $(ROOT)/$(PYTHON36_PACKAGES)
-	unzip $(TEMPORA_URL)/$(TEMPORA) -d $(ROOT)/$(PYTHON36_PACKAGES)
-	unzip $(PORTEND_URL)/$(PORTEND) -d $(ROOT)/$(PYTHON36_PACKAGES)
-	unzip $(JCLASSES_URL)/$(JCLASSES) -d $(ROOT)/$(PYTHON36_PACKAGES)
-	unzip $(IMPLIB_URL)/$(IMPLIB) -d $(ROOT)/$(PYTHON36_PACKAGES)
-	unzip $(JTEXT_URL)/$(JTEXT) -d $(ROOT)/$(PYTHON36_PACKAGES)
-	unzip $(JCOLLECTIONS_URL)/$(JCOLLECTIONS) -d $(ROOT)/$(PYTHON36_PACKAGES)
-	unzip $(CHEROOT_URL)/$(CHEROOT) -d $(ROOT)/$(PYTHON36_PACKAGES)
-	unzip $(ZC_URL)/$(ZC) -d $(ROOT)/$(PYTHON36_PACKAGES)
-	unzip $(SETUPT_URL)/$(SETUPT) -d $(ROOT)/$(PYTHON36_PACKAGES)
-	unzip $(ARCHIVENAME)-$(VERSION)-py2.py3-none-any.$(WHEEL_POSTFIX) -d $(ROOT)/$(PYTHON36_PACKAGES)
+    mkdir -p $(ROOT)/$(PKGROOT)/rocks/etc
+    install -m 664 *.whl $(ROOT)/$(PKGROOT)/rocks/etc
 
 clean::
 	rm -rf $(ARCHIVENAME)-$(VERSION) version.mk prepSrc.sh

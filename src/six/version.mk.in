@@ -4,7 +4,7 @@ ARCHIVENAME	= six
 RELEASE		= 2
 TARBALL_POSTFIX	= tar.gz
 
-RPM.FILES =  $(PYTHON36_PACKAGES)/*
+RPM.FILES =  $(PKGROOT)/*
 
 # Satisfies dependencies:
 #   from packaging->pytest

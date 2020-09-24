@@ -3,7 +3,7 @@ VERSION		= 3.1.0
 ARCHIVENAME	= zipp
 RELEASE		= 1
 
-RPM.FILES =  $(PYTHON36_PACKAGES)/*
+RPM.FILES =  $(PKGROOT)/*
 
 # Satisfies dependencies:
 #   importlib-metadata>=0.12; python_version < "3.8"->pytest
