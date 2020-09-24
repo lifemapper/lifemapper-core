@@ -7,51 +7,28 @@
 # # more-itertools (from cherrypy)
 # # six>=1.7.0 (from jaraco.collections->cherrypy)
 # # zipp>=0.4; python_version < "3.8" (from importlib-resources; python_version < "3.7"->jaraco.text->jaraco.collections->cherrypy)
-
 # pytz (from tempora>=1.8->portend>=2.1.1->cherrypy)
-D1_URL=@PYPI_URL@/4f/a4/879454d49688e2fad93e59d7d4efda580b783c745fd2ec2a3adf87b0808d
-D1_PKG=pytz-2020.1-py2.py3-none-any.@WHEEL_POSTFIX@
-
+PYTZ_URL=@PYPI_URL@/4f/a4/879454d49688e2fad93e59d7d4efda580b783c745fd2ec2a3adf87b0808d
 # jaraco.functools (from cheroot>=8.2.1->cherrypy)
-D3_URL=@PYPI_URL@/4f/2b/bbab94f3e461adaf3c7a3a25da0c67c91d8cf7a4ddae7096028601ff940f
-D3_PKG=jaraco.functools-3.0.1-py3-none-any.@WHEEL_POSTFIX@
-
+JFUNCTOOLS_URL=@PYPI_URL@/4f/2b/bbab94f3e461adaf3c7a3a25da0c67c91d8cf7a4ddae7096028601ff940f
 # tempora>=1.8 (from portend>=2.1.1->cherrypy)
-D4_URL=@PYPI_URL@/b1/a3/c2bb79aa42ef7c56eec7f12a7d403b6b06b1194bf0736a93b120b5c680f2
-D4_PKG=tempora-4.0.0-py3-none-any.@WHEEL_POSTFIX@
-
+TEMPORA_URL=@PYPI_URL@/b1/a3/c2bb79aa42ef7c56eec7f12a7d403b6b06b1194bf0736a93b120b5c680f2
 # portend>=2.1.1 (from cherrypy)
-D5_URL=@PYPI_URL@/d7/79/eee70a512bffe5ceb5008f8e3326581948f50ca393c3bcb4d557e4818bd1
-D5_PKG=portend-2.6-py2.py3-none-any.@WHEEL_POSTFIX@
-
+PORTEND_URL=@PYPI_URL@/d7/79/eee70a512bffe5ceb5008f8e3326581948f50ca393c3bcb4d557e4818bd1
 # jaraco.classes (from jaraco.collections->cherrypy)
-D6_URL=@PYPI_URL@/68/ce/8f43aa0d0f18120e687ae0192fe3168630040841a3e87bed93c5fe024dbe
-D6_PKG=jaraco.classes-3.1.0-py2.py3-none-any.@WHEEL_POSTFIX@
-
+JCLASSES_URL=@PYPI_URL@/68/ce/8f43aa0d0f18120e687ae0192fe3168630040841a3e87bed93c5fe024dbe
 # importlib-resources; python_version < "3.7" (from jaraco.text->jaraco.collections->cherrypy)
-D9_URL=@PYPI_URL@/ba/03/0f9595c0c2ef12590877f3c47e5f579759ce5caf817f8256d5dcbd8a1177
-D9_PKG=importlib_resources-3.0.0-py2.py3-none-any.@WHEEL_POSTFIX@
-
+IMPLIB_URL=@PYPI_URL@/ba/03/0f9595c0c2ef12590877f3c47e5f579759ce5caf817f8256d5dcbd8a1177
 # jaraco.text (from jaraco.collections->cherrypy)
-D10_URL=@PYPI_URL@/50/cd/6eda44738065e844bed8fae60a229b6c46f42d0ba8d48205e9fb57e254cd
-D10_PKG=jaraco.text-3.2.0-py2.py3-none-any.@WHEEL_POSTFIX@
-
+JTEXT_URL=@PYPI_URL@/50/cd/6eda44738065e844bed8fae60a229b6c46f42d0ba8d48205e9fb57e254cd
 # jaraco.collections (from cherrypy)
-D11_URL=@PYPI_URL@/fe/06/a89652069f0a13a33701714c0c8e0cc8656bf6d21b7c6b85fde86cf06ff6
-D11_PKG=jaraco.collections-3.0.0-py2.py3-none-any.@WHEEL_POSTFIX@
-
+JCOLLECTIONS_URL=@PYPI_URL@/fe/06/a89652069f0a13a33701714c0c8e0cc8656bf6d21b7c6b85fde86cf06ff6
 # cheroot>=8.2.1 (from cherrypy)
-D12_URL=@PYPI_URL@/bd/39/942862090e73344fc60461449ae2755c71de4a8ce735174474dc283bfda7
-D12_PKG=cheroot-8.4.5-py2.py3-none-any.@WHEEL_POSTFIX@
-
+CHEROOT_URL=@PYPI_URL@/bd/39/942862090e73344fc60461449ae2755c71de4a8ce735174474dc283bfda7
 # zc.lockfile (from cherrypy)
-D13_URL=@PYPI_URL@/6c/2a/268389776288f0f26c7272c70c36c96dcc0bdb88ab6216ea18e19df1fadd
-D13_PKG=zc.lockfile-2.0-py2.py3-none-any.@WHEEL_POSTFIX@
-
+ZC_URL=@PYPI_URL@/6c/2a/268389776288f0f26c7272c70c36c96dcc0bdb88ab6216ea18e19df1fadd
 # setuptools (from zc.lockfile->cherrypy)
-D14_URL=@PYPI_URL@/7d/53/cd47a7799c5e82de7e408fecd72266dcc6cd7be32629b6022d4d6d91a2fc
-D14_PKG=setuptools-50.2.0-py3-none-any.@WHEEL_POSTFIX@
-
+SETUPT_URL=@PYPI_URL@/7d/53/cd47a7799c5e82de7e408fecd72266dcc6cd7be32629b6022d4d6d91a2fc
 # cherrypy
 DL_URL=@PYPI_URL@/a8/f9/e11f893dcabe6bc222a1442bf5e14f0322a2d363c92910ed41947078a35a
 DL_PKG=@ARCHIVENAME@-@VERSION@-py2.py3-none-any.@WHEEL_POSTFIX@
@@ -59,17 +36,17 @@ DL_PKG=@ARCHIVENAME@-@VERSION@-py2.py3-none-any.@WHEEL_POSTFIX@
 
 get_wheel_files () {
   echo "Fetch CherryPy dependencies"
-  wget "$D1_URL/$D1_PKG"
-  wget "$D3_URL/$D3_PKG"
-  wget "$D4_URL/$D4_PKG"
-  wget "$D5_URL/$D5_PKG"
-  wget "$D6_URL/$D6_PKG"
-  wget "$D9_URL/$D9_PKG"
-  wget "$D10_URL/$D10_PKG"
-  wget "$D11_URL/$D11_PKG"
-  wget "$D12_URL/$D12_PKG"
-  wget "$D13_URL/$D13_PKG"
-  wget "$D14_URL/$D14_PKG"
+  wget "$PYTZ_URL/$PYTZ_PKG"
+  wget "$JFUNCTOOLS_URL/$JFUNCTOOLS_PKG"
+  wget "$TEMPORA_URL/$TEMPORA_PKG"
+  wget "$PORTEND_URL/$PORTEND_PKG"
+  wget "$JCLASSES_URL/$JCLASSES_PKG"
+  wget "$IMPLIB_URL/$IMPLIB_PKG"
+  wget "$JTEXT_URL/$JTEXT_PKG"
+  wget "$JCOLLECTIONS_URL/$JCOLLECTIONS_PKG"
+  wget "$CHEROOT_URL/$CHEROOT_PKG"
+  wget "$ZC_URL/$ZC_PKG"
+  wget "$SETUPT_URL/$SETUPT_PKG"
 
   echo "Fetch CherryPy"
   wget "$DL_URL/$DL_PKG"

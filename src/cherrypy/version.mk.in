@@ -4,21 +4,21 @@ ARCHIVENAME = CherryPy
 RELEASE		= 1
 WHEEL_POSTFIX	= whl
 
+# cherrypy dependencies
+PYTZ_PKG=pytz-2020.1-py2.py3-none-any.$(WHEEL_POSTFIX)
+JFUNCTOOLS_PKG=jaraco.functools-3.0.1-py3-none-any.$(WHEEL_POSTFIX)
+TEMPORA_PKG=tempora-4.0.0-py3-none-any.$(WHEEL_POSTFIX)
+PORTEND_PKG=portend-2.6-py2.py3-none-any.$(WHEEL_POSTFIX)
+JCLASSES_PKG=jaraco.classes-3.1.0-py2.py3-none-any.$(WHEEL_POSTFIX)
+IMPLIB_PKG=importlib_resources-3.0.0-py2.py3-none-any.$(WHEEL_POSTFIX)
+JTEXT_PKG=jaraco.text-3.2.0-py2.py3-none-any.$(WHEEL_POSTFIX)
+JCOLLECTIONS_PKG=jaraco.collections-3.0.0-py2.py3-none-any.$(WHEEL_POSTFIX)
+CHEROOT_PKG=cheroot-8.4.5-py2.py3-none-any.$(WHEEL_POSTFIX)
+ZC_PKG=zc.lockfile-2.0-py2.py3-none-any.$(WHEEL_POSTFIX)
+SETUPT_PKG=setuptools-50.2.0-py3-none-any.$(WHEEL_POSTFIX)
+#     more-itertools    (separate rpm)
+#     zipp              (separate rpm)
+#     six               (separate rpm)
+
 RPM.FILES =  $(PYTHON36_PACKAGES)/*
 
-# cherrypy dependencies
-#     pytz
-#     more-itertools    (separate rpm)
-#     jaraco.functools
-#     tempora
-#     portend
-#     jaraco.classes
-#     six
-#     zipp              (separate rpm)
-#     importlib-resources
-#     jaraco.text
-#     six               (separate rpm)
-#     jaraco.collections
-#     cheroot
-#     zc.lockfile
-#     setuptools
