@@ -2,6 +2,7 @@ NAME		= opt-lifemapper-zipp
 VERSION		= 3.1.0
 ARCHIVENAME	= zipp
 RELEASE		= 1
+WHEEL_POSTFIX = whl
 
 RPM.FILES =  $(PKGROOT)/*
 

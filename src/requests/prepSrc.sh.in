@@ -11,10 +11,10 @@ CHARDET_URL=@PYPI_URL@/bc/a9/01ffebfb562e4274b6487b4bb1ddec7ca55ec7510b22e4c51f1
 
 get_dependencies () {
     echo "Fetch requests dependencies"
-    wget $URLLIB3_URL/$URLLIB3
-    wget $IDNA_URL/$IDNA
-    wget $CERTIFI_URL/$CERTIFI
-    wget $CHARDET_URL/$CHARDET
+    wget $URLLIB3_URL/@URLLIB3@
+    wget $IDNA_URL/@IDNA@
+    wget $CERTIFI_URL/@CERTIFI@
+    wget $CHARDET_URL/@CHARDET@
 }
 
 get_wheel_file () {

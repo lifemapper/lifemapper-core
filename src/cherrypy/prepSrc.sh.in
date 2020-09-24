@@ -36,20 +36,20 @@ DL_PKG=@ARCHIVENAME@-@VERSION@-py2.py3-none-any.@WHEEL_POSTFIX@
 
 get_wheel_files () {
   echo "Fetch CherryPy dependencies"
-  wget "$PYTZ_URL/@PYTZ@"
-  wget "$JFUNCTOOLS_URL/@JFUNCTOOLS@"
-  wget "$TEMPORA_URL/@TEMPORA@"
-  wget "$PORTEND_URL/@PORTEND@"
-  wget "$JCLASSES_URL/@JCLASSES@"
-  wget "$IMPLIB_URL/@IMPLIB@"
-  wget "$JTEXT_URL/@JTEXT@"
-  wget "$JCOLLECTIONS_URL/@JCOLLECTIONS@"
-  wget "$CHEROOT_URL/@CHEROOT@"
-  wget "$ZC_URL/@ZC@"
-  wget "$SETUPT_URL/@SETUPT@"
+  wget $PYTZ_URL/@PYTZ@
+  wget $JFUNCTOOLS_URL/@JFUNCTOOLS@
+  wget $TEMPORA_URL/@TEMPORA@
+  wget $PORTEND_URL/@PORTEND@
+  wget $JCLASSES_URL/@JCLASSES@
+  wget $IMPLIB_URL/@IMPLIB@
+  wget $JTEXT_URL/@JTEXT@
+  wget $JCOLLECTIONS_URL/@JCOLLECTIONS@
+  wget $CHEROOT_URL/@CHEROOT@
+  wget $ZC_URL/@ZC@
+  wget $SETUPT_URL/@SETUPT@
 
   echo "Fetch CherryPy"
-  wget "$DL_URL/$DL_PKG"
+  wget $DL_URL/$DL_PKG
 }
 
 ### main ###

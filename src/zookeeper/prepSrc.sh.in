@@ -1,0 +1,28 @@
+#!/bin/bash
+
+# Purpose: Fetch Zookeeper
+# This package contains all the jar files required to run ZooKeeper
+ZK_URL=https://downloads.apache.org/@ARCHIVENAME@/@ARCHIVENAME@-@VERSION@
+ZK_PKG=apache-@ARCHIVENAME@-@VERSION@-bin.@TARBALL_POSTFIX@
+ZK_SHA=$ZK_PKG.sha512
+
+get_pkg_file () {
+  echo "Fetch @ARCHIVENAME@ package"
+  wget "$ZK_URL/$ZK_PKG" 
+}
+
+check_pkg_file() {
+  echo "Check downloaded @ARCHIVENAME@ code"
+  wget "$ZK_URL/$ZK_SHA" 
+  
+  IS_OK=`/usr/bin/sha512sum -c $SRC_SHA | awk '{print $2}'`
+  if [ $IS_OK = 'OK' ]; then
+  	 echo "$ZK_PKG is verified."
+  else
+  	 echo "$ZK_PKG sha512 sum does not match, do NOT proceed."
+  fi
+}
+
+### main ###
+get_pkg_file
+check_pkg_file
