@@ -1,7 +1,7 @@
 NAME 			= opt-lifemapper-pytest-cov
 ARCHIVENAME		= pytest_cov
 VERSION 		= 2.10.1
-RELEASE 		= 0
+RELEASE 		= 1
 WHEEL_POSTFIX		= whl
 
 # (ordered) dependencies for pytest-cov
@@ -22,4 +22,4 @@ WHEEL_POSTFIX		= whl
 
 RPM.EXTRAS = "AutoReq: no"
 
-RPM.FILES =  $(PKGROOT)/*
+RPM.FILES =  $(PYTHON36_PACKAGES)/*

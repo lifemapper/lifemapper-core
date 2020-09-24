@@ -88,8 +88,8 @@ build:
 	echo $(ARCHIVENAME)-$(VERSION)
 
 install::
-	mkdir -p $(ROOT)/$(PKGROOT)/rocks/etc
-	install -m 664 $(ARCHIVENAME)-$(VERSION)-py3-none-any.whl $(ROOT)/$(PKGROOT)/rocks/etc
+    mkdir -p $(ROOT)/$(PYTHON36_PACKAGES)
+    unzip $(ARCHIVENAME)-$(VERSION)-py3-none-any.whl -d $(ROOT)/$(PYTHON36_PACKAGES)
 
 clean::
 	rm -rf $(ARCHIVENAME)-$(VERSION) version.mk prepSrc.sh

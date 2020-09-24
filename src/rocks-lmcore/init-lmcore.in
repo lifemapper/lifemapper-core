@@ -181,7 +181,7 @@ TimeStamp () {
 set_defaults
 TimeStamp "# Start"
 
-install_wheels
+# install_wheels
 finish_solr_install
 set_permissions
 # install_cron_jobs

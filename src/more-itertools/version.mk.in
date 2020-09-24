@@ -1,10 +1,10 @@
 NAME		= opt-lifemapper-more-itertools
 VERSION     = 8.5.0
 ARCHIVENAME = more_itertools
-RELEASE		= 0
+RELEASE		= 1
 WHEEL_POSTFIX = whl
 
-RPM.FILES =  $(PKGROOT)/*
+RPM.FILES =  $(PYTHON36_PACKAGES)/*
 
 # Satisfies dependencies:
 #   from cherrypy

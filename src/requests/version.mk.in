@@ -1,9 +1,9 @@
 NAME = opt-lifemapper-requests
 ARCHIVENAME = requests
 VERSION = 2.24.0
-RELEASE = 0
+RELEASE = 1
 
-RPM.FILES =  $(PKGROOT)/*
+RPM.FILES =  $(PYTHON36_PACKAGES)/*
 
 # requests 2.24.0 dependencies:
 #     chardet<3.1.0,>=3.0.2

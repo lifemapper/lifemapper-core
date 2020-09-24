@@ -1,9 +1,9 @@
 NAME		= opt-lifemapper-zipp
 VERSION		= 3.1.0
 ARCHIVENAME	= zipp
-RELEASE		= 0
+RELEASE		= 1
 
-RPM.FILES =  $(PKGROOT)/*
+RPM.FILES =  $(PYTHON36_PACKAGES)/*
 
 # Satisfies dependencies:
 #   importlib-metadata>=0.12; python_version < "3.8"->pytest

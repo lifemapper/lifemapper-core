@@ -1,10 +1,10 @@
 NAME		= opt-lifemapper-six
 VERSION     = 1.15.0
 ARCHIVENAME	= six
-RELEASE		= 1
+RELEASE		= 2
 TARBALL_POSTFIX	= tar.gz
 
-RPM.FILES =  $(PKGROOT)/*
+RPM.FILES =  $(PYTHON36_PACKAGES)/*
 
 # Satisfies dependencies:
 #   from packaging->pytest
