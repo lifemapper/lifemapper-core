@@ -2,7 +2,7 @@ NAME		= opt-lifemapper-six
 VERSION     = 1.15.0
 ARCHIVENAME	= six
 RELEASE		= 2
-TARBALL_POSTFIX	= tar.gz
+WHEEL_POSTFIX	= whl
 
 RPM.FILES =  $(PKGROOT)/*
 
