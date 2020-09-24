@@ -23,6 +23,7 @@
     <!-- for web -->
     <package>opt-lifemapper-cherrypy</package>
     <package>opt-lifemapper-mod_wsgi</package>
+    <package>lifemapper-solr</package>
 
     <!-- lifemapper distro -->
     <package>roll-lifemapper-core-kickstart</package>
