@@ -39,7 +39,7 @@ del-lifemapper() {
     $RM rocks-lmcore
     $RM opt-lifemapper-six
     # in del-solr
-    # $RM opt-lifemapper-solr
+    # $RM lifemapper-solr
     $RM opt-lifemapper-zipp
     $RM roll-lifemapper-core-usersguide
     $RM roll-lifemapper-core-kickstart
@@ -101,10 +101,11 @@ del-solr () {
 
     $RM opt-lifemapper-solr
     echo "Removing solr configuration and directories" >> $LOG
-    rm -f /etc/default/solr.in.sh
-    rm -f /etc/security/limits.d/solr.lmcore.conf
     rm -rf /var/solr
     rm -rf /opt/solr
+    rm -f /etc/default/solr.in.sh
+    rm -f /etc/rc.d/init.d/solr
+    rm -f /etc/security/limits.d/solr.lmcore.conf
 }
 
 del-webstuff () {
