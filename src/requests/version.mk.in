@@ -1,13 +1,18 @@
-NAME = opt-lifemapper-requests
-ARCHIVENAME = requests
-VERSION = 2.24.0
-RELEASE = 1
-
-RPM.FILES =  $(PKGROOT)/*
+NAME            = opt-lifemapper-requests
+ARCHIVENAME     = requests
+VERSION         = 2.24.0
+RELEASE         = 1
+WHEEL_POSTFIX   = whl
 
 # requests 2.24.0 dependencies:
 #     chardet<3.1.0,>=3.0.2
 #     idna<2.9,>=2.5
 #     urllib3!=1.25.0,!=1.25.1,<1.26,>=1.21.1
 #     certifi>=2017.4.17
-# Install collected packages: urllib3, idna, certifi, chardet, requests
+URLLIB3         = urllib3-1.25.10-py2.py3-none-any.$(WHEEL_POSTFIX)
+IDNA            = idna-2.10-py2.py3-none-any.$(WHEEL_POSTFIX)
+CERTIFI         = certifi-2020.6.20-py2.py3-none-any.$(WHEEL_POSTFIX)
+CHARDET         = chardet-3.0.4-py2.py3-none-any.$(WHEEL_POSTFIX)
+
+RPM.FILES =  $(PKGROOT)/*
+

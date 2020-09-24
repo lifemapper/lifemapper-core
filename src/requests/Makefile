@@ -69,7 +69,11 @@ SEDSPEC += \
         -e 's%@ARCHIVENAME@%$(ARCHIVENAME)%g'  \
         -e 's%@VERSION@%$(VERSION)%g'  \
         -e 's%@PYPI_URL@%$(PYPI_URL)%g'  \
-        -e 's%@TARBALL_POSTFIX@%$(TARBALL_POSTFIX)%g'
+        -e 's%@URLLIB3@%$(URLLIB3)%g'  \
+        -e 's%@IDNA@%$(IDNA)%g'  \
+        -e 's%@CERTIFI@%$(CERTIFI)%g'  \
+        -e 's%@CHARDET@%$(CHARDET)%g'  \
+        -e 's%@WHEEL_POSTFIX@%$(WHEEL_POSTFIX)%g'
 
 prepSrc.sh: prepSrc.sh.in
 	$(SED) $(SEDSPEC) $^ > $@
