@@ -4,9 +4,10 @@ set PYBIN=/opt/python/bin
 set LMBIN=@PKGROOT@/bin
 setenv  SOLR_JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.222.b10-0.el7_6.x86_64/jre
 setenv  JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.222.b10-0.el7_6.x86_64/jre
+setenv  SOLR_HOME=/opt/solr/bin
 
 module load opt-python
-set path = ( $PYBIN $LMBIN $JAVA_HOME/bin $path )
+set path = ( $PYBIN $LMBIN $JAVA_HOME/bin $SOLR_HOME $path )
 setenv PYTHON $PYBIN/@PYTHONVER@
 setenv PYTHONPATH "@LMHOME@:@PYTHON36_PACKAGES@"
 

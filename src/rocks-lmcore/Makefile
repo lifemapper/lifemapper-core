@@ -77,6 +77,10 @@ SEDSPEC += \
         -e 's%@PYTHON36_PACKAGES@%$(PYTHON36_PACKAGES)%g' \
         -e 's%@PKGROOT@%$(PKGROOT)%g' \
         -e 's%@LMURL@%$(LMURL)%g' \
+        -e 's%@BASE_DEPS@%$(BASE_DEPS)%g' \
+        -e 's%@PYTESTCOV_PLUS_DEPS@%$(PYTESTCOV_PLUS_DEPS)%g' \
+        -e 's%@CHERRYPY_PLUS_DEPS@%$(CHERRYPY_PLUS_DEPS)%g' \
+        -e 's%@REQUESTS_DEPS@%$(REQUESTS_DEPS)%g' \
         -e 's%@TARBALL_POSTFIX@%$(TARBALL_POSTFIX)%g'
         
 PROFILES = \

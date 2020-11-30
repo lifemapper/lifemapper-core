@@ -56,10 +56,7 @@ Update existing code and script RPMs (without new roll)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #. Copy individual rpms to /export/rocks/install/contrib/7.0/x86_64/RPMS/ 
    This will only update RPMs that are part of the original roll.
-   To add rpms that are not yet part of the rolls, put them into a directory 
-   shared from FE to nodes (/share/lm/). 
-   
-#. then rebuild distribution.  ::
+   then rebuild distribution.  ::
    
    # (module unload opt-python; cd /export/rocks/install; rocks create distro; yum clean all)
    # yum list updates

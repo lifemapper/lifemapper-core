@@ -16,6 +16,9 @@ JCOLLECTIONS= jaraco.collections-3.0.0-py2.py3-none-any.$(WHEEL_POSTFIX)
 CHEROOT     = cheroot-8.4.5-py2.py3-none-any.$(WHEEL_POSTFIX)
 ZC          = zc.lockfile-2.0-py2.py3-none-any.$(WHEEL_POSTFIX)
 SETUPT      = setuptools-50.2.0-py3-none-any.$(WHEEL_POSTFIX)
+# handles CORS, pulls in httpagentparser
+CP_CORS     = cherrypy_cors-1.6-py2.py3-none-any.$(WHEEL_POSTFIX)
+
 #     more-itertools    (separate rpm)
 #     zipp              (separate rpm)
 #     six               (separate rpm)

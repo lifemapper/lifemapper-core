@@ -32,7 +32,8 @@ SETUPT_URL=@PYPI_URL@/7d/53/cd47a7799c5e82de7e408fecd72266dcc6cd7be32629b6022d4d
 # cherrypy
 DL_URL=@PYPI_URL@/a8/f9/e11f893dcabe6bc222a1442bf5e14f0322a2d363c92910ed41947078a35a
 DL_PKG=@ARCHIVENAME@-@VERSION@-py2.py3-none-any.@WHEEL_POSTFIX@
-  
+# cherrypy-cors
+CORS_URL=https://files.pythonhosted.org/packages/8c/eb/2dde33117abfb7a856e0ed2f554f0f4ad97477465c7708a53531e3661370
 
 get_wheel_files () {
   echo "Fetch CherryPy dependencies"
@@ -50,6 +51,9 @@ get_wheel_files () {
 
   echo "Fetch CherryPy"
   wget $DL_URL/$DL_PKG
+
+  echo "Fetch CherryPy CORS handler"
+  wget $CORS_URL/@CP_CORS@
 }
 
 ### main ###

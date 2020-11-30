@@ -14,6 +14,11 @@ LMUSER_COUNT=`/bin/egrep -i "^lmwriter" /etc/passwd  | wc -l`
 LMROLL_COUNT=`$ROCKS_CMD list roll | grep lifemapper | wc -l`
 LMCOMPUTE_ROLL_COUNT=`$ROCKS_CMD list roll | grep lifemapper-compute |  wc -l`
 LMSERVER_ROLL_COUNT=`$ROCKS_CMD list roll | grep lifemapper-server |  wc -l`
+# Some filenames <> package names (more-itertools, cherrypy, etc)
+BASE_DEPS=@BASE_DEPS@
+PYTESTCOV_PLUS_DEPS=@PYTESTCOV_PLUS_DEPS@
+CHERRYPY_PLUS_DEPS=@CHERRYPY_PLUS_DEPS@
+REQUESTS_DEPS=@REQUESTS_DEPS@
 
 TimeStamp () {
     echo $1 `/bin/date` >> $LOG
@@ -45,6 +50,19 @@ del-lifemapper() {
     $RM roll-lifemapper-core-kickstart
 }
 
+del-python-libs() {
+    # Pulled in with cherrypy-cors
+    $PY3 -m pip uninstall httpagentparser
+    for dep in $BASE_DEPS
+        $PY3 -m pip uninstall $dep
+    for dep in $PYTESTCOV_PLUS_DEPS
+        $PY3 -m pip uninstall $dep
+    for dep in $CHERRYPY_PLUS_DEPS
+        $PY3 -m pip uninstall $dep
+    for dep in $REQUESTS_DEPS
+        $PY3 -m pip uninstall $dep
+}
+
 del-shared-directories() {
    echo "Removing lifemapper installation directory" >> $LOG
    rm -rf @LMHOME@
@@ -55,6 +73,7 @@ del-shared-directories() {
    rm -rf /var/run/lifemapper
 }
 
+
 del-shared-user-group () {
     echo "Remove lmwriter user/group/dirs" >> $LOG
     /usr/bin/gpasswd -d apache lmwriter
@@ -63,22 +82,18 @@ del-shared-user-group () {
     /bin/rm -f /var/spool/mail/lmwriter
     /bin/rm -rf /export/home/lmwriter
 
-    /bin/egrep -i "^solr" /etc/passwd
-    if [[ $? -eq 0 ]]; then
-        echo "Remove solr user" >> $LOG
-        userdel solr
-        /bin/rm -f /var/spool/mail/solr
-        /bin/rm -rf /export/home/solr
-    fi
-
     echo "Syncing users info" >> $LOG
     $ROCKS_CMD sync users
 }
 
+# Should be removed with rocks-lmcore rpm
 del-config () {
     echo "Removing system configuration files used by lifemapper" >> $LOG
-    rm -rf  /etc/ld.so.conf.d/lifemapper-core-ld.conf
     rm -rf  /etc/profile.d/lifemapper-core.*
+    rm -rf  /etc/httpd/conf.d/lifemapper-core-http.conf
+    rm -rf  /etc/ld.so.conf.d/lifemapper-core-ld.conf
+    rm -rf  /etc/logrotate.d/lifemapper-httpd
+    rm -rf  /etc/systemd/system/httpd.service.d/lifemapper-core-umask.conf
 }
 
 del-directories () {   
@@ -99,13 +114,21 @@ del-solr () {
         /usr/sbin/service solr stop
     fi    
 
-    $RM opt-lifemapper-solr
+    /bin/egrep -i "^solr" /etc/passwd
+    if [[ $? -eq 0 ]]; then
+        echo "Remove solr user" >> $LOG
+        userdel solr
+        /bin/rm -f /var/spool/mail/solr
+        /bin/rm -rf /export/home/solr
+    fi
+
+    echo "Syncing users info" >> $LOG
+    $ROCKS_CMD sync users
+
+    $RM lifemapper-solr
     echo "Removing solr configuration and directories" >> $LOG
     rm -rf /var/solr
     rm -rf /opt/solr
-    rm -f /etc/default/solr.in.sh
-    rm -f /etc/rc.d/init.d/solr
-    rm -f /etc/security/limits.d/solr.lmcore.conf
 }
 
 del-webstuff () {
@@ -163,7 +186,9 @@ TimeStamp "# Start"
 stop-services
 
 del-lifemapper
-del-config
+del-python-libs
+# should be deleted with rocks-lmcore rpm
+# del-config
 del-webstuff
 del-cron-jobs
 del-directories

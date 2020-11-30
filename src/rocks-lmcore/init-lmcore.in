@@ -48,6 +48,14 @@ set_defaults() {
     WHL_DIR=@PKGROOT@/rocks/etc
     PY3=@PYBIN@
     
+    # Python wheels
+    # Some filenames <> package names (more-itertools, cherrypy, etc)
+    BASE_DEPS=@BASE_DEPS@
+    PYTESTCOV_PLUS_DEPS=@PYTESTCOV_PLUS_DEPS@
+    CHERRYPY_PLUS_DEPS=@CHERRYPY_PLUS_DEPS@
+    REQUESTS_DEPS=@REQUESTS_DEPS@
+
+    
     # Source function library.
     INITD=/etc/rc.d/init.d
     . $INITD/functions
@@ -77,12 +85,6 @@ set_permissions () {
 
 # Ordered installations use included wheel files
 order_wheel_installs () {
-    # Some filenames <> package names (more-itertools, cherrypy, etc)
-    BASE_DEPS="more_itertools six zipp"
-    PYTESTCOV_PLUS_DEPS="coverage py importlib_metadata iniconfig toml pluggy attrs pyparsing packaging pytest pytest_cov"
-    CHERRYPY_PLUS_DEPS="pytz jaraco.functools tempora portend jaraco.classes importlib_resources jaraco.text jaraco.collections cheroot zc.lockfile CherryPy"
-    REQUESTS_DEPS="urllib3 idna certifi chardet requests"
-
     echo "-- install ordered wheel dependencies ..." 
     for dep in $BASE_DEPS
         do
